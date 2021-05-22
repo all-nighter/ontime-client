@@ -15,7 +15,7 @@ const MainSearch = (props) => {
     return (
         <Paper className={Styles.searchContainer}>
             <div className={Styles.searchTitleContainer}>
-                <Typography className={Styles.searchTitle}> Search Result </Typography>
+                <Typography className={Styles.searchTitle}> SEARCH </Typography>
             </div> 
             <SearchArea map={map}/>
         </Paper>

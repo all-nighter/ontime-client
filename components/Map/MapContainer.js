@@ -15,10 +15,10 @@ const MapContainer = (props) => {
   const {map, ...rest} = props
 
     const mapStyles = {        
-      height: "100vh",
+      height: "75vh",
       width: "100%",
       position: 'absolute',
-      top: 0,
+      top: '25vh',
       left: 0
     };
     
