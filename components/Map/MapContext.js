@@ -7,7 +7,10 @@ const MapContext = {
     startCoordinates: {},
     destCoordinates: {},
     time: '00:00',
-    numDays: 0
+    numDays: 0,
+    frequencyOfWeek: [],
+    mapType: 0,
+    estimatedTimeSeconds: 0
 }
 
 const initialize = async (center) => {
@@ -36,6 +39,27 @@ const renderPin = () => {}
 
 const renderNumDays = () => {}
 
+const renderMapType = () => {}
+
+const renderAgain = () => {}
+
+const renderEstimatedTime = () => {}
+
+const renderFrequency = () => {}
+
+const renderSubmit = () => {}
 
 
-export default {initialize, setContext, getMapContext, renderSearch, renderPin, renderNumDays}
+export default {
+    initialize, 
+    setContext, 
+    getMapContext, 
+    renderSearch, 
+    renderPin, 
+    renderNumDays, 
+    renderMapType, 
+    renderAgain,
+    renderEstimatedTime,
+    renderFrequency,
+    renderSubmit
+}

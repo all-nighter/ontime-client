@@ -41,6 +41,8 @@ const DaySelect = () => {
         } 
     ])
 
+    const [frequency, setFrequency] = useState([])
+
 
     const handleClick = (i) => {
         const newDays = days
@@ -49,10 +51,21 @@ const DaySelect = () => {
         let currentNumDay = MapContext.getMapContext().numDays;
         if (newDays[i].selected) {
             currentNumDay += 1
+            let currentFrequency = frequency
+            currentFrequency.push(i)
+            setFrequency(currentFrequency)
         } else {
+            let currentFrequency = frequency
+            const index = currentFrequency.indexOf(i);
+            if (index > -1) {
+                currentFrequency.splice(index, 1);
+            }
+            setFrequency(currentFrequency)
             currentNumDay -= 1
         }
         MapContext.setContext('numDays', currentNumDay)
+
+        MapContext.setContext('frequencyOfWeek',frequency)
         MapContext.renderNumDays()
         
     }
@@ -60,7 +73,10 @@ const DaySelect = () => {
     return (
         <div className={Styles.dayContainer}>
             {days.map( (dayObj, i) => (
-                <div key={i} className={ `${Styles.day} ${days[i].selected ? Styles.selected : null}`} onClick={(e) => handleClick(i)}>
+                <div key={i} className={ `${Styles.day} ${days[i].selected ? Styles.selected : null}`} onClick={(e) => {
+                    handleClick(i)
+                }
+                }>
                     {dayObj.day}
                 </div>
             ))}

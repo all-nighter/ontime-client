@@ -1,0 +1,160 @@
+.finalInfoContainer {
+    width: 100%;
+    height: 50vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+
+}
+.leave {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 19px;
+    color: #969696;
+}
+
+.timeText {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 37px;
+}
+
+.minContainer {
+    display: flex;
+    margin:auto;
+    position: relative;
+
+}
+
+.min {
+    display: flex;
+    flex-direction:column;
+    justify-content: flex-end;
+}
+.startTime {
+    display: flex;
+    flex-direction:column;
+    
+}
+
+.arriveTime {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+
+}
+
+.arrow {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+}
+
+.arrow img {
+    height: 30px;
+    width: 30px;
+    margin: auto;
+
+}
+
+.tinyText {
+    margin-left: 5px;
+    display:flex;
+    flex-direction:column;
+    justify-content: flex-end;
+    align-items: center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: center;
+
+    /* Dark Gray */
+
+    color: #969696;
+
+}
+
+
+.minText {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 32px;
+    line-height: 37px;
+
+}
+
+.imgContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.serviceContainer {
+    padding-left: 2rem;
+    display: flex;
+    flex-direction:column;
+    justify-content: left;
+    text-align: left;
+}
+.serviceText1 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+}
+
+.serviceText2 {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    color: #969696;
+
+}
+
+.priceContainer {
+    display: flex;
+    flex-direction:column;
+
+    justify-content: flex-end;
+}
+
+.priceText {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    text-align: right;
+    color: #00B5CE;
+}
+
+.priceContainer {
+    width: 90%;
+    margin:auto;
+}
+
+.divider {
+    width: 100%;
+}

@@ -38,10 +38,18 @@
     display: flex;
     align-items: center;
     justify-content: center; /* Horizontal center alignment */
+   
 }
 
 .searchTitle {
     text-align: center;
+    color: #010101;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+
 }
 
 .textContainer {
@@ -83,6 +91,16 @@
     display: flex;
     justify-content: space-around;
     padding: 10px;
+}
+
+.daySelectContainer2 {
+    background-color: hsl(0, 0%, 93%);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+
+
 }
 
 .dayContainer {

@@ -8,6 +8,7 @@ import MainSearch from '../components/Map/Search/MapSearch';
 
 import MapContext from '../components/Map/MapContext';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import FinalCheck from '../components/Map/FinalInfo/FinalCheck'
 
 const useStyles = makeStyles((theme) => ({
   middleGrid: {
@@ -27,6 +28,10 @@ function App() {
   const [mapContext, setMapContext] = useState({
     ...MapContext.getMapContext(),
   });
+
+  MapContext.renderMapType = () => {
+    setMapContext({...mapContext, ...MapContext.getMapContext()})
+  }
 
   const [loading, setLoading] = useState(true);
 
@@ -54,9 +59,21 @@ function App() {
     navigator.geolocation.getCurrentPosition(success, error);
   }, []);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(success, error);
-  }, []);
+  const mapStyle1 = {
+      height: "55vh",
+      width: "100%",
+      position: 'absolute',
+      top: '45vh',
+      left: 0
+  }
+
+  const mapStyle2 = {
+    height: "50vh",
+    width: "100%",
+    position: 'absolute',
+    top: 0,
+    left: 0
+}
 
   return (
     <MainLayout>
@@ -65,8 +82,17 @@ function App() {
           <CircularProgress />
         ) : (
           <React.Fragment>
+            { mapContext.mapType === 0 ?
             <MainSearch map={mapContext} />
-            <MapContainer map={mapContext} />
+            : null
+            }
+            <MapContainer map={mapContext} mapStyles={mapContext.mapType === 0 ? mapStyle1: mapStyle2}/>
+
+            {mapContext.mapType === 1 ?
+            <FinalCheck/> 
+            :
+            null
+            }
           </React.Fragment>
         )}
       </div>

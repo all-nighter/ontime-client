@@ -11,33 +11,25 @@ import {
 import SearchArea from './SearchArea';
 import TimeSelect from './TimeSelect';
 
-import API_PREFIX from '../../../env.js'
-import { MapContext } from '@react-google-maps/api';
+import MapContext from '../MapContext';
 
 const MainSearch = (props) => {
-
 
     const {map, ...rest} = props
 
     const handleSubmit = async () => {
-        let response = await fetch(`${API_PREFIX}/user/subscription`, {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json',
-            },
-            body: JSON.stringify({
-              email: localStorage.getItem('email'),
-              ...MapContext.getMapContext()
-            }),
-          })
-
-        response = await response.json()
+        MapContext.setContext('mapType', 1)
+        MapContext.renderMapType()
+        MapContext.renderAgain()
+        MapContext.renderEstimatedTime()
+        MapContext.renderFrequency()
+        MapContext.renderSubmit()
     }
 
     return (
         <Paper className={Styles.searchContainer}>
             <div className={Styles.searchTitleContainer}>
-                <Typography className={Styles.searchTitle}> SEARCH </Typography>
+                <h1 className={Styles.searchTitle}> SEARCH </h1>
             </div> 
             <SearchArea map={map}/>
             <TimeSelect />
