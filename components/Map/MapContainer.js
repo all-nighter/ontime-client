@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
 
-import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api'
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const MapContainer = () => { 
 
     const mapStyles = {        
-      height: "100vh",
+      height: "80vh",
       width: "100%"
     };
     
@@ -13,13 +13,7 @@ const MapContainer = () => {
       lat: 0, lng: 0
     })
 
-    console.log('current position', currentPosition)
-
-    const onMarkerDragEnd = (e) => {
-        const lat = e.latLng.lat();
-        const lng = e.latLng.lng();
-        setCurrentPosition({ lat, lng})
-    };
+  console.log('current position', currentPosition);
 
     function success(pos) {
       var crd = pos.coords;
@@ -46,20 +40,18 @@ const MapContainer = () => {
       <GoogleMap
         mapContainerStyle={mapStyles}
         zoom={13}
-        center={currentPosition}>
-        {
-          currentPosition.lat? 
-            <Marker
-              position={currentPosition}
-              onDragEnd={(e) => onMarkerDragEnd(e)}
-              draggable={true} /> :
-              null
-        }
+        center={currentPosition}
+      >
+        {currentPosition.lat ? (
+          <Marker
+            position={currentPosition}
+            onDragEnd={(e) => onMarkerDragEnd(e)}
+            draggable={true}
+          />
+        ) : null}
       </GoogleMap>
     </LoadScript>
-  )
-
-}
-
+  );
+};
 
 export default MapContainer;
