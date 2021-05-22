@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { green } from '@material-ui/core/colors';
@@ -58,15 +58,40 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function App() {
+function SelectUserDriver() {
   const classes = useStyles();
+
+  return (
+    <Grid className={classes.middleGrid}>
+      <Button
+        onClick={() => {
+          setIsUser(true);
+        }}
+      >
+        User
+      </Button>
+      <Button
+        onClick={() => {
+          setIsDriver(true);
+        }}
+      >
+        Driver
+      </Button>
+    </Grid>
+  );
+}
+
+function App() {
+  const [isUser, setIsUser] = useState(false);
+  const [isDriver, setIsDriver] = useState(false);
   return (
     <MainLayout>
-      <Grid className={classes.middleGrid}>
-        <Link href="/login">
-          <Button>START!</Button>
-        </Link>
-      </Grid>
+      {!isUser && !isDriver && (
+        <SelectUserDriver
+          setIsUser={setIsUser}
+          setIsDriver={setIsDriver}
+        ></SelectUserDriver>
+      )}
     </MainLayout>
   );
 }

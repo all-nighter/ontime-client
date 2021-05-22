@@ -41,9 +41,10 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useRouter } from 'next/router';
+// import socketIOClient from "socket.io-client";
+// import { DropzoneDialog } from 'material-ui-dropzone';
 import { Elements, useStripe } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import Link from 'next/link';
 import MainLayout from '../layout/mainlayout';
 
 const useStyles = makeStyles((theme) => ({
@@ -62,11 +63,7 @@ function App() {
   const classes = useStyles();
   return (
     <MainLayout>
-      <Grid className={classes.middleGrid}>
-        <Link href="/login">
-          <Button>START!</Button>
-        </Link>
-      </Grid>
+      <Typography>Main Page</Typography>
     </MainLayout>
   );
 }

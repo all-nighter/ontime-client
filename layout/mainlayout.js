@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
+import PropTypes from 'prop-types';
 import { green } from '@material-ui/core/colors';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -41,12 +42,22 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { useRouter } from 'next/router';
+// import socketIOClient from "socket.io-client";
+// import { DropzoneDialog } from 'material-ui-dropzone';
 import { Elements, useStripe } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import Link from 'next/link';
-import MainLayout from '../layout/mainlayout';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    height: '100vh',
+  },
+  mainGrid: {
+    width: '100vw',
+    height: '90vh',
+    spacing: 0,
+    justify: 'space-around',
+  },
   middleGrid: {
     height: '80vh',
     spacing: 0,
@@ -55,20 +66,39 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    // backgroundColor: 'red',
+  },
+  appbar: {
+    height: '10vh',
+    backgroundColor: 'dodgerblue',
+  },
+  footer: {
+    height: '10vh',
+    backgroundColor: 'dodgerblue',
+    bottom: 0,
+    position: 'fixed',
+    width: '100vw',
   },
 }));
 
-function App() {
+function MainLayout(props) {
   const classes = useStyles();
+  const { children } = props;
   return (
-    <MainLayout>
-      <Grid className={classes.middleGrid}>
-        <Link href="/login">
-          <Button>START!</Button>
-        </Link>
+    <div className={classes.root}>
+      <Grid className={classes.appbar}></Grid>
+      <Grid className={classes.mainGrid}>
+        <Grid className={classes.middleGrid} xs={12}>
+          {children}
+        </Grid>
       </Grid>
-    </MainLayout>
+      <Grid className={classes.footer}></Grid>
+    </div>
   );
 }
 
-export default App;
+MainLayout.propTypes = {
+  children: PropTypes.node,
+};
+
+export default MainLayout;
