@@ -7,15 +7,19 @@ import Grid from '@material-ui/core/Grid';
 import Link from 'next/link';
 import MainLayout from '../layout/mainlayout';
 
+const mint = '#00B5CE';
+
 const useStyles = makeStyles((theme) => ({
   middleGrid: {
-    height: '80vh',
+    height: '100vh',
+    width: '100vw',
     spacing: 0,
     direction: 'column',
     textAlign: 'center',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: mint,
   },
 }));
 
@@ -25,7 +29,7 @@ function App() {
     <MainLayout hideFooter={true}>
       <Grid className={classes.middleGrid}>
         <Link href="/login">
-          <Button>START!</Button>
+          <img src={'/logo1.png'} />
         </Link>
       </Grid>
     </MainLayout>

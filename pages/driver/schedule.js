@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link';
-import MainLayout from '../layout/mainlayout';
+import MainLayout from '../../layout/mainlayout';
 import { Typography } from '@material-ui/core';
 
 const mint = '#00B5CE';
@@ -141,6 +141,9 @@ const useStyles = makeStyles((theme) => ({
   _smallText: {
     fontSize: '3.5vw',
   },
+  _bold: {
+    fontWeight: 'bold',
+  },
 }));
 
 function Header() {
@@ -157,7 +160,9 @@ function Header() {
         </Link>
       </Grid>
       <Grid className={classes.upcomingEventContainer}>
-        <Typography>cab is ariving in 30 minutes!</Typography>
+        <Typography className={classes._bold}>
+          cab is ariving in 30 minutes!
+        </Typography>
       </Grid>
     </Grid>
   );

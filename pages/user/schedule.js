@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link';
-import MainLayout from '../layout/mainlayout';
+import MainLayout from '../../layout/mainlayout';
 import { Typography } from '@material-ui/core';
 
 const mint = '#00B5CE';
@@ -128,7 +128,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     color: 'grey',
   },
-  book: { border: 'solid 1vw #8080804f' },
+  book: { border: 'solid 1px #8080804f' },
   title: {
     fontSize: '4vw',
     fontWeight: 'bold',
@@ -140,6 +140,12 @@ const useStyles = makeStyles((theme) => ({
   },
   _smallText: {
     fontSize: '3.5vw',
+  },
+  _bold: {
+    fontWeight: 'bold',
+  },
+  scheduleContainer: {
+    marginBottom: '3vh',
   },
 }));
 
@@ -157,7 +163,9 @@ function Header() {
         </Link>
       </Grid>
       <Grid className={classes.upcomingEventContainer}>
-        <Typography>cab is ariving in 30 minutes!</Typography>
+        <Typography className={classes._bold}>
+          cab is ariving in 30 minutes!
+        </Typography>
       </Grid>
     </Grid>
   );
@@ -249,11 +257,11 @@ function PlanTemplate() {
   );
 }
 
-function Scedule(props) {
+function Schedule(props) {
   const classes = useStyles();
   let schedule = checkSchedule(props.day?.day, props.data);
   return (
-    <React.Fragment>
+    <Grid className={classes.scheduleContainer}>
       <Grid>
         <Grid className={classes.dateContainer}>
           <Typography className={`${classes._padding} ${classes.month}`}>
@@ -279,7 +287,7 @@ function Scedule(props) {
           <NoPlanTemplate />
         </Grid>
       )}
-    </React.Fragment>
+    </Grid>
   );
 }
 
@@ -308,7 +316,7 @@ function Content() {
   return (
     <Grid className={classes.contentContainer}>
       {days.map((x) => (
-        <Scedule day={x} data={data} />
+        <Schedule day={x} data={data} />
       ))}
     </Grid>
   );
