@@ -25,10 +25,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100vw',
     display: 'flex',
     flexDirection: 'column',
-    flexGrow: 1,
+    // flexGrow: 1,
     boxShadow: '0 0 10px 10px #00000014',
     borderRadius: '0 0 15px 15px',
-    height: '20vh',
+    height: '15vh',
   },
   headerTitle: {
     flexGrow: 1,
@@ -43,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   contentContainer: {
-    flexGrow: 5,
+    // flexGrow: 5,
+    height: '85vh',
     width: '100vw',
     padding: '5vw',
     overflow: 'scroll',
@@ -191,13 +192,13 @@ const data = [
 
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const daysMap = {
+  0: 'Sun',
   1: 'Mon',
   2: 'Tue',
   3: 'Wed',
   4: 'Thu',
   5: 'Fri',
   6: 'Sat',
-  7: 'Sun',
 };
 const monthMap = {
   4: 'May',
@@ -308,7 +309,7 @@ function Content() {
   const now = new Date();
   const days = [];
   for (let i = 0; i < 7; i++) {
-    const day = ((now.getDay() + i) % 8) + Math.floor((now.getDay() + i) / 8);
+    const day = (now.getDay() + i) % 7;
     const date = now.getDate() + i;
     const month = now.getMonth() + Math.floor(date / 30);
     days.push({ day, date, month });
