@@ -79,6 +79,8 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     width: '100vw',
     display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
 }));
 
