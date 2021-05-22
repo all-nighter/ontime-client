@@ -2,13 +2,35 @@
 
 .searchContainer {
     width: 100%;
-    height: 25vh;
+    height: 45vh;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 99;
     display: flex;
     flex-direction: column;
+}
+
+.images {
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.imgContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.image {
+    height: 25px;
+    width: 25px;
+
+}
+
+.superThin {
+    height: 25px;
+    width: 1.9px
 }
 
 .searchTitleContainer {
@@ -27,11 +49,81 @@
     margin: auto;
     width: 80%;
     display: flex;
+    justify-content: left;
     align-items:center;
 }
 
 .textArea {
     height: 100%;
-    width: 75%;
+    width: 90%;
     flex-grow: 1;
+}
+
+.accordion {
+    box-shadow:none;
+}
+
+.timeSelectHeader {
+    margin-top : 1rem;
+    margin-left: 3.2rem;
+}
+
+.timeContainer {
+    display: flex;
+}
+
+.timeInput {
+    width: 100px;
+}
+
+.daySelectContainer {
+    margin: auto;
+    background-color: hsl(0, 0%, 93%);
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.dayContainer {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+}
+
+.day {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #FFFFFF;
+    border-radius: 10px;
+    height: 50px;
+    margin:auto;
+    margin-left: 1px;
+    margin-right: 1px;
+    width: 25%;
+
+}
+
+.numDay {
+    height: 100%;
+    line-height: 10px;
+}
+
+.selected {
+    background-color:#00B5CE !important;
+}
+
+
+.buttonsContainer {
+    padding: 20px;
+}
+.buttonContainer {
+    background: #00B5CE;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+.button {
+    width: 100%
 }

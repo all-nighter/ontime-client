@@ -39,38 +39,57 @@ const MainSearch = (props) => {
 
     return (
         <Grid container className={Styles.textContainer}> 
-            <Grid item xs={12}>
-                <TextField 
-                    id="outlined-basic" 
-                    size="small" 
-                    variant="outlined" 
-                    className={Styles.textArea}
-                    value={search.startAddress}
-                    onChange={(e) => handleSearch('startAddress', e)}
-                    onKeyPress={async (e) => {
-                        if(e.key === 'Enter' && search.startAddress.length > 0){
-                            e.preventDefault(); // Ensure it is only this code that runs
-                            await submitSearch('startAddress', 'startCoordinates', e)
-                        }
-                    }}
-                />
-            </Grid> 
-            <Grid item xs={12}>
-                <TextField 
-                    id="outlined-basic" 
-                    size="small" 
-                    variant="outlined" 
-                    className={Styles.textArea}
-                    value={search.destAddress}
-                    onChange={(e) => handleSearch('destAddress', e)}
-                    onKeyPress={async (e) => {
-                        if(e.key === 'Enter' && search.destAddress.length > 0){
-                        await submitSearch('destAddress', 'destCoordinates', e)
-                    }}
-                }
+            <Grid item xs={2} className={Styles.images}>
+                <Grid item xs={12} className={Styles.imgContainer}> 
+                    <img src='/departure.png' className={Styles.image}/>
+                </Grid>
+                <Grid item xs={12} className={Styles.imgContainer}>
+                    <img src='/Line.png' className={Styles.superThin} />
+                </Grid> 
+                <Grid  item xs={12} className={Styles.imgContainer}> 
+                    <img src='/Vector.png' className={Styles.image}/>
+                </Grid>
+            </Grid>
+            <Grid container xs={9} spacing={2}> 
+                <Grid item xs={12}>
+                    <TextField 
+                        id="outlined-basic" 
+                        size="small" 
+                        variant="outlined" 
+                        className={Styles.textArea}
+                        value={search.startAddress}
+                        onChange={(e) => handleSearch('startAddress', e)}
+                        onKeyPress={async (e) => {
+                            if(e.key === 'Enter' && search.startAddress.length > 0){
+                                e.preventDefault(); // Ensure it is only this code that runs
+                                await submitSearch('startAddress', 'startCoordinates', e)
+                            }
+                        }}
+                    />
+                </Grid> 
+                <Grid item xs={12}>
+                    <TextField 
+                        id="outlined-basic" 
+                        size="small" 
+                        variant="outlined" 
+                        className={Styles.textArea}
+                        value={search.destAddress}
+                        onChange={(e) => handleSearch('destAddress', e)}
+                        onKeyPress={async (e) => {
+                            if(e.key === 'Enter' && search.destAddress.length > 0){
+                            await submitSearch('destAddress', 'destCoordinates', e)
+                        }}
+                    }
 
-                />
-            </Grid> 
+                    />
+                </Grid> 
+
+            </Grid>
+            <Grid item xs={1}>
+                <Grid item xs={12} className={Styles.imgContainer}>
+                    <img src='./swap_vert.png' className={Styles.image}/>
+                </Grid>
+            </Grid>
         </Grid>
     )
 
