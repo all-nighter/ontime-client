@@ -48,7 +48,7 @@ const MainSearch = (props) => {
                     value={search.startAddress}
                     onChange={(e) => handleSearch('startAddress', e)}
                     onKeyPress={async (e) => {
-                        if(e.key === 'Enter'){
+                        if(e.key === 'Enter' && search.startAddress.length > 0){
                             e.preventDefault(); // Ensure it is only this code that runs
                             await submitSearch('startAddress', 'startCoordinates', e)
                         }
@@ -64,7 +64,7 @@ const MainSearch = (props) => {
                     value={search.destAddress}
                     onChange={(e) => handleSearch('destAddress', e)}
                     onKeyPress={async (e) => {
-                        if(e.key === 'Enter'){
+                        if(e.key === 'Enter' && search.destAddress.length > 0){
                         await submitSearch('destAddress', 'destCoordinates', e)
                     }}
                 }
