@@ -6,7 +6,8 @@ const MapContext = {
     destAddress: '',
     startCoordinates: {},
     destCoordinates: {},
-    mode: 0
+    time: '00:00',
+    numDays: 0
 }
 
 const initialize = async (center) => {
@@ -30,10 +31,11 @@ const getMapContext = () => {
 
 const renderSearch = () => {}
 
-const renderMode = () => {}
 
 const renderPin = () => {}
 
+const renderNumDays = () => {}
 
 
-export default {initialize, setContext, getMapContext, renderSearch, renderMode, renderPin}
+
+export default {initialize, setContext, getMapContext, renderSearch, renderPin, renderNumDays}
