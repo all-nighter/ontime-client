@@ -10,8 +10,6 @@ const MapContext = {
 }
 
 const initialize = async (center) => {
-
-    console.log('centterrrr', center)
     MapContext.startAddress = await convertCoordToAddress(center);
     MapContext.destAddress = ''
     MapContext.startCoordinates = center;

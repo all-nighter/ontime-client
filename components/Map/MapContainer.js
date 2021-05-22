@@ -27,7 +27,6 @@ const MapContainer = (props) => {
       destCoordinates: map.destCoordinates,
       startAddress: map.startAddress,
       destAddress: map.destAddress,
-
     })
 
     // useEffect( () => {
@@ -49,41 +48,53 @@ const MapContainer = (props) => {
       MapContext.renderPin()
   };
 
-  console.log('davsfdacsdvsdavsdafvsdas', pinPosition)
+
 
   return (
       <LoadScript googleMapsApiKey={process.env.GOOGLEMAP}>
         <GoogleMap
+          onLoad= {map => {
+            const bounds = new window.google.maps.LatLngBounds();
+            bounds.extend(new window.google.maps.LatLng(pinPosition.startCoordinates.lat, pinPosition.startCoordinates.lng))
+            bounds.extend(new window.google.maps.LatLng(
+              pinPosition.destCoordinates.lat || pinPosition.startCoordinates.lat, 
+              pinPosition.destCoordinates.lng || pinPosition.startCoordinates.lng))
+            map.fitBounds(bounds)
+            var opt = {maxZoom: 16 };
+            map.setOptions(opt);
+
+          }}
           key={new Date()}
           mapContainerStyle={mapStyles}
-          zoom={14}
           center={
             {
-              lat: pinPosition.startCoordinates.lat,
-              lng: pinPosition.startCoordinates.lng,
+              lat: (pinPosition.startCoordinates.lat + (pinPosition.destCoordinates.lat || pinPosition.startCoordinates.lat)) / 2,
+              lng: (pinPosition.startCoordinates.lng + (pinPosition.destCoordinates.lng || pinPosition.startCoordinates.lng)) / 2,
             }
           }
         >
-          {pinPosition.startCoordinates.lat ? (
-            <Marker
-              position={{
-                lat: pinPosition.startCoordinates.lat,
-                lng: pinPosition.startCoordinates.lng,
-              }}
-              onDragEnd={async (e) => await onMarkerDragEnd('startAddress', 'startCoordinates', e)}
-              draggable={true}
-            />
-          ) : null}
-          {pinPosition.destCoordinates.lat ? (
-            <Marker
-              position={{
-                lat: pinPosition.destCoordinates.lat,
-                lng: pinPosition.destCoordinates.lng,
-              }}
-              onDragEnd={async (e) => await onMarkerDragEnd('destAddress', 'destCoordinates', e)}
-              draggable={true}
-            />
-          ) : null}
+          <div> 
+            {pinPosition.startCoordinates.lat ? (
+              <Marker
+                position={{
+                  lat: pinPosition.startCoordinates.lat,
+                  lng: pinPosition.startCoordinates.lng,
+                }}
+                onDragEnd={async (e) => await onMarkerDragEnd('startAddress', 'startCoordinates', e)}
+                draggable={true}
+              />
+            ) : null}
+            {pinPosition.destCoordinates.lat ? (
+              <Marker
+                position={{
+                  lat: pinPosition.destCoordinates.lat,
+                  lng: pinPosition.destCoordinates.lng,
+                }}
+                onDragEnd={async (e) => await onMarkerDragEnd('destAddress', 'destCoordinates', e)}
+                draggable={true}
+              />
+            ) : null}
+          </div>
         </GoogleMap>
 
       </LoadScript>
