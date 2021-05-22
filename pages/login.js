@@ -83,6 +83,10 @@ const useStyles = makeStyles((theme) => ({
     height: '7vh',
     backgroundColor: mint,
     color: '#fff',
+    '&:hover': {
+      backgroundColor: mint,
+      color: '#fff',
+    },
   },
   signup: {
     width: '90vw',
