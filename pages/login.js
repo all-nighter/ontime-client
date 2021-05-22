@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import { Input } from '@material-ui/core';
+import { Input, TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Link from 'next/link';
 import MainLayout from '../layout/mainlayout';
 import { API_PREFIX } from '../env';
+import { InputLabel } from '@material-ui/core';
 
 const mint = '#00B5CE';
 
@@ -34,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
   inputContainer: {
     display: 'flex',
     flexDirection: 'column',
+    justifyContent: 'space-around',
+    width: '100vw',
   },
   signinContainer: {
     display: 'flex',
@@ -66,13 +69,31 @@ const useStyles = makeStyles((theme) => ({
     width: '100vw',
     display: 'flex',
     position: 'fixed',
-    top: '15vh',
+    top: '10vh',
     justifyContent: 'center',
     flexDirection: 'column',
     alignItems: 'center',
+    left: 0,
   },
   mint: {
     color: mint,
+  },
+  login: {
+    width: '90vw',
+    height: '7vh',
+    backgroundColor: mint,
+    color: '#fff',
+  },
+  signup: {
+    width: '90vw',
+    height: '7vh',
+    color: 'grey',
+  },
+  margin10px: {
+    margin: '10px',
+  },
+  marginTop: {
+    marginTop: '10vh',
   },
 }));
 
@@ -157,42 +178,67 @@ function UserLogin(props) {
     <Grid className={classes.middleGrid}>
       <Grid className={classes.signinContainer}>
         <Grid className={classes.inputContainer}>
-          <Input placeholder={'id'} />
-          <Input placeholder={'password'} />
+          {/* <Typography className={classes.margin10px}>E-mail</Typography> */}
+          <TextField
+            variant="outlined"
+            label="E-mail"
+            InputProps={{
+              className: classes.margin10px,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(e) => {
+              console.log(e.target.value);
+              setEmail(e.target.value);
+            }}
+          />
+          {/* <Typography>Password</Typography> */}
+          <TextField
+            variant="outlined"
+            label="Password"
+            InputProps={{
+              className: classes.margin10px,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          <Button
+            onClick={() => {
+              fetch(`${API_PREFIX}/user/login`, {
+                method: 'POST',
+                headers: {
+                  'content-type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+              }).then((res) => {
+                if (res.status === 200) {
+                  localStorage.setItem('email', email);
+                  location.href = '/main';
+                } else {
+                  alert('login failed');
+                }
+              });
+            }}
+            className={`${classes.login} ${classes.margin10px}`}
+          >
+            Login
+          </Button>
+          <Button
+            onClick={() => {
+              props.setIsSignup(true);
+            }}
+            className={`${classes.signup} ${classes.margin10px}`}
+          >
+            SignUp
+          </Button>
         </Grid>
         {/* <Link href="/main"> */}
-        <Button
-          onClick={() => {
-            fetch(`${API_PREFIX}/user/login`, {
-              method: 'POST',
-              headers: {
-                'content-type': 'application/json',
-              },
-              body: JSON.stringify({ email, password }),
-            }).then((res) => {
-              if (res.status === 200) {
-                alert(email);
-                localStorage.setItem('email', email);
-                location.href = '/main';
-              } else {
-                alert('login failed');
-              }
-            });
-          }}
-        >
-          Login
-        </Button>
         {/* </Link> */}
-      </Grid>
-      <Grid>
-        <Typography>Don't have an account yet?</Typography>
-        <Button
-          onClick={() => {
-            props.setIsSignup(true);
-          }}
-        >
-          SignUp
-        </Button>
       </Grid>
     </Grid>
   );
@@ -206,51 +252,64 @@ function DriverLogin(props) {
     <Grid className={classes.middleGrid} container spacing={3}>
       <Grid className={classes.signinContainer}>
         <Grid className={classes.inputContainer}>
-          <Input
-            placeholder={'email'}
+          <TextField
+            variant="outlined"
+            label="E-mail"
+            InputProps={{
+              className: classes.margin10px,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => {
+              console.log(e.target.value);
               setEmail(e.target.value);
             }}
           />
-          <Input
-            placeholder={'password'}
+          <TextField
+            variant="outlined"
+            label="Password"
+            InputProps={{
+              className: classes.margin10px,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => {
+              console.log(e.target.value);
               setPassword(e.target.value);
             }}
           />
+          <Button
+            onClick={() => {
+              fetch(`${API_PREFIX}/driver/login`, {
+                method: 'POST',
+                headers: {
+                  'content-type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+              }).then((res) => {
+                if (res.status === 200) {
+                  localStorage.setItem('email', email);
+                  location.href = '/driver/schedule';
+                } else {
+                  alert('login failed');
+                }
+              });
+            }}
+            className={`${classes.login} ${classes.margin10px}`}
+          >
+            Login
+          </Button>
+          <Button
+            onClick={() => {
+              props.setIsSignup(true);
+            }}
+            className={`${classes.signup} ${classes.margin10px}`}
+          >
+            SignUp
+          </Button>
         </Grid>
-        {/* <Link href="/main"> */}
-        <Button
-          onClick={() => {
-            fetch(`${API_PREFIX}/driver/login`, {
-              method: 'POST',
-              headers: {
-                'content-type': 'application/json',
-              },
-              body: JSON.stringify({ email, password }),
-            }).then((res) => {
-              if (res.status === 200) {
-                localStorage.setItem('email', email);
-                location.href = '/driver/schedule';
-              } else {
-                alert('login failed');
-              }
-            });
-          }}
-        >
-          Login
-        </Button>
-        {/* </Link> */}
-      </Grid>
-      <Grid>
-        <Typography>Don't have an account yet?</Typography>
-        <Button
-          onClick={() => {
-            props.setIsSignup(true);
-          }}
-        >
-          SignUp
-        </Button>
       </Grid>
     </Grid>
   );
@@ -271,78 +330,109 @@ function UserSignup(props) {
   }, [name, email, phoneNumber, password]);
 
   return (
-    <Grid className={classes.middleGrid} container spacing={3}>
+    <Grid className={`${classes.middleGrid} ${classes.marginTop}`}>
       <Grid className={classes.signinContainer}>
         <Grid className={classes.inputContainer}>
-          <Input
-            placeholder={'name'}
+          <TextField
+            variant="outlined"
+            label="name"
+            InputProps={{
+              className: classes.margin10px,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => {
+              console.log(e.target.value);
               setName(e.target.value);
             }}
           />
-          <Input
-            placeholder={'email'}
+          <TextField
+            variant="outlined"
+            label="E-mail"
+            InputProps={{
+              className: classes.margin10px,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => {
+              console.log(e.target.value);
               setEmail(e.target.value);
             }}
           />
-          <Input
-            placeholder={'phoneNumber'}
+          <TextField
+            variant="outlined"
+            label="phone number"
+            InputProps={{
+              className: classes.margin10px,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => {
+              console.log(e.target.value);
               setPhoneNumber(e.target.value);
             }}
           />
-          <Input
-            placeholder={'password'}
+          <TextField
+            variant="outlined"
+            label="password"
+            InputProps={{
+              className: classes.margin10px,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => {
+              console.log(e.target.value);
               setPassword(e.target.value);
             }}
           />
-        </Grid>
-        <Button
-          onClick={() => {
-            const params = {
-              name,
-              email,
-              phoneNumber,
-              password,
-            };
-            console.log('params:', params);
-            fetch(`${API_PREFIX}/user/signup`, {
-              method: 'POST',
-              headers: {
-                'content-type': 'application/json',
-              },
-              body: JSON.stringify(params),
-            })
-              .then((res) => {
-                if (res.status === 200) {
-                  localStorage.setItem('email', email);
-                  location.href = '/main';
-                } else if (res.status === 409) {
-                  alert('this email already exists!');
-                } else {
-                  alert('signup failed! please try again');
-                }
-                return;
+          <Button
+            onClick={() => {
+              const params = {
+                name,
+                email,
+                phoneNumber,
+                password,
+              };
+              console.log('params:', params);
+              fetch(`${API_PREFIX}/user/signup`, {
+                method: 'POST',
+                headers: {
+                  'content-type': 'application/json',
+                },
+                body: JSON.stringify(params),
               })
-              .catch((e) => {
-                alert(e);
-              });
-          }}
-        >
-          SignUp
-        </Button>
-      </Grid>
-      <Grid>
-        <Typography>Already have an account?</Typography>
-        <Button
-          onClick={() => {
-            props.setIsSignup(false);
-          }}
-        >
-          Login
-        </Button>
+                .then((res) => {
+                  if (res.status === 200) {
+                    localStorage.setItem('email', email);
+                    location.href = '/main';
+                  } else if (res.status === 409) {
+                    alert('this email already exists!');
+                  } else {
+                    alert('signup failed! please try again');
+                  }
+                  return;
+                })
+                .catch((e) => {
+                  alert(e);
+                });
+            }}
+            className={`${classes.login} ${classes.margin10px}`}
+          >
+            SignUp
+          </Button>
+          <Button
+            onClick={() => {
+              props.setIsSignup(false);
+            }}
+            className={`${classes.signup} ${classes.margin10px}`}
+          >
+            Login
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );
@@ -363,78 +453,109 @@ function DriverSignup(props) {
   }, [name, email, phoneNumber, password]);
 
   return (
-    <Grid className={classes.middleGrid} container spacing={3}>
+    <Grid className={`${classes.middleGrid} ${classes.marginTop}`}>
       <Grid className={classes.signinContainer}>
         <Grid className={classes.inputContainer}>
-          <Input
-            placeholder={'name'}
+          <TextField
+            variant="outlined"
+            label="name"
+            InputProps={{
+              className: classes.margin10px,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => {
+              console.log(e.target.value);
               setName(e.target.value);
             }}
           />
-          <Input
-            placeholder={'email'}
+          <TextField
+            variant="outlined"
+            label="E-mail"
+            InputProps={{
+              className: classes.margin10px,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => {
+              console.log(e.target.value);
               setEmail(e.target.value);
             }}
           />
-          <Input
-            placeholder={'phoneNumber'}
+          <TextField
+            variant="outlined"
+            label="phone number"
+            InputProps={{
+              className: classes.margin10px,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => {
+              console.log(e.target.value);
               setPhoneNumber(e.target.value);
             }}
           />
-          <Input
-            placeholder={'password'}
+          <TextField
+            variant="outlined"
+            label="password"
+            InputProps={{
+              className: classes.margin10px,
+            }}
+            InputLabelProps={{
+              shrink: true,
+            }}
             onChange={(e) => {
+              console.log(e.target.value);
               setPassword(e.target.value);
             }}
           />
-        </Grid>
-        <Button
-          onClick={() => {
-            const params = {
-              name,
-              email,
-              phoneNumber,
-              password,
-            };
-            console.log('params:', params);
-            fetch(`${API_PREFIX}/driver/signup`, {
-              method: 'POST',
-              headers: {
-                'content-type': 'application/json',
-              },
-              body: JSON.stringify(params),
-            })
-              .then((res) => {
-                if (res.status === 200) {
-                  localStorage.setItem('email', email);
-                  location.href = '/driver/schedule';
-                } else if (res.status === 409) {
-                  alert('this email already exists!');
-                } else {
-                  alert('signup failed! please try again');
-                }
-                return;
+          <Button
+            onClick={() => {
+              const params = {
+                name,
+                email,
+                phoneNumber,
+                password,
+              };
+              console.log('params:', params);
+              fetch(`${API_PREFIX}/driver/signup`, {
+                method: 'POST',
+                headers: {
+                  'content-type': 'application/json',
+                },
+                body: JSON.stringify(params),
               })
-              .catch((e) => {
-                alert(e);
-              });
-          }}
-        >
-          SignUp
-        </Button>
-      </Grid>
-      <Grid>
-        <Typography>Already have an account?</Typography>
-        <Button
-          onClick={() => {
-            props.setIsSignup(false);
-          }}
-        >
-          Login
-        </Button>
+                .then((res) => {
+                  if (res.status === 200) {
+                    localStorage.setItem('email', email);
+                    location.href = '/driver/schedule';
+                  } else if (res.status === 409) {
+                    alert('this email already exists!');
+                  } else {
+                    alert('signup failed! please try again');
+                  }
+                  return;
+                })
+                .catch((e) => {
+                  alert(e);
+                });
+            }}
+            className={`${classes.login} ${classes.margin10px}`}
+          >
+            SignUp
+          </Button>
+          <Button
+            onClick={() => {
+              props.setIsSignup(false);
+            }}
+            className={`${classes.signup} ${classes.margin10px}`}
+          >
+            Login
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );

@@ -192,13 +192,13 @@ const data = [
 
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const daysMap = {
+  0: 'Sun',
   1: 'Mon',
   2: 'Tue',
   3: 'Wed',
   4: 'Thu',
   5: 'Fri',
   6: 'Sat',
-  7: 'Sun',
 };
 const monthMap = {
   4: 'May',
@@ -309,7 +309,7 @@ function Content() {
   const now = new Date();
   const days = [];
   for (let i = 0; i < 7; i++) {
-    const day = ((now.getDay() + i) % 8) + Math.floor((now.getDay() + i) / 8);
+    const day = (now.getDay() + i) % 7;
     const date = now.getDate() + i;
     const month = now.getMonth() + Math.floor(date / 30);
     days.push({ day, date, month });
