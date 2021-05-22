@@ -8,6 +8,8 @@ import Link from 'next/link';
 import MainLayout from '../layout/mainlayout';
 import { Typography } from '@material-ui/core';
 
+const mint = '#00B5CE';
+
 const useStyles = makeStyles((theme) => ({
   middleGrid: {
     height: '100vh',
@@ -48,7 +50,8 @@ const useStyles = makeStyles((theme) => ({
   },
   toMap: {
     position: 'fixed',
-    right: 0,
+    left: 0,
+    color: mint,
   },
   dateContainer: {
     display: 'flex',
@@ -130,6 +133,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '4vw',
     fontWeight: 'bold',
   },
+  arriveTime: {
+    color: mint,
+    fontSize: '5vw',
+    fontWeight: 'bold',
+  },
 }));
 
 function Header() {
@@ -139,7 +147,10 @@ function Header() {
       <Grid className={classes.headerTitle}>
         <Typography className={classes.title}>SCHEDULE</Typography>
         <Link href="/main">
-          <Button className={classes.toMap}>map</Button>
+          <Button className={classes.toMap}>
+            <img src={'/navigate_before.png'} />
+            map
+          </Button>
         </Link>
       </Grid>
       <Grid className={classes.upcomingEventContainer}>
@@ -209,7 +220,9 @@ function PlanTemplate() {
             <Typography className={classes.desc}>with children</Typography>
           </Grid>
         </Grid>
-        <Grid className={classes._column}>AM 08:45</Grid>
+        <Grid className={`${classes._column} ${classes.arriveTime}`}>
+          AM 08:45
+        </Grid>
       </Grid>
       <Grid>
         <Grid className={classes._row}>
