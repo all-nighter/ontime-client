@@ -1,16 +1,25 @@
 import React, {useState, useEffect} from 'react'
 
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import {TextField} from '@material-ui/core'
+
+import MapContext from './MapContext'
+import MainSearch from './Search/MainSearch'
 
 const MapContainer = () => { 
 
     const mapStyles = {        
-      height: "80vh",
+      height: "60vh",
       width: "100%"
     };
     
     const [currentPosition, setCurrentPosition] = useState({
       lat: 0, lng: 0
+    })
+
+
+    const [mapState, setMapState] = useState({
+      ...MapContext.getMapContext()
     })
 
   console.log('current position', currentPosition);
@@ -34,9 +43,16 @@ const MapContainer = () => {
       navigator.geolocation.getCurrentPosition(success, error);
     }, [])
 
+    const onMarkerDragEnd = (e) => {
+      const lat = e.latLng.lat();
+      const lng = e.latLng.lng();
+      setCurrentPosition({ lat, lng})
+  };
+
 
   return (
     <LoadScript googleMapsApiKey={process.env.GOOGLEMAP}>
+      <MainSearch/>
       <GoogleMap
         mapContainerStyle={mapStyles}
         zoom={13}
