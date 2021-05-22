@@ -1,13 +1,23 @@
 
+import {convertCoordToAddress, convertAddressToCoord} from '../../lib/Map/map.lib'
 
 const MapContext = {
-    startSearch: '',
-    destinationSearch: '',
+    startAddress: '',
+    destAddress: '',
     startCoordinates: {},
     destCoordinates: {},
-
-    mode: 'chooseStart'
+    mode: 0
 }
+
+const initialize = async (center) => {
+    MapContext.startAddress = await convertCoordToAddress(center);
+    MapContext.destAddress = ''
+    MapContext.startCoordinates = center;
+    MapContext.destCoordinates = {}
+    MapContext.mode = 0
+    return MapContext
+}
+
 
 const setContext = (field, val ) => {
     MapContext[field] = val
@@ -18,7 +28,12 @@ const getMapContext = () => {
     return MapContext
 }
 
-const render = () => {}
+const renderSearch = () => {}
+
+const renderMode = () => {}
+
+const renderPin = () => {}
 
 
-export default {setContext, getMapContext, render}
+
+export default {initialize, setContext, getMapContext, renderSearch, renderMode, renderPin}
