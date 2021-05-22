@@ -217,7 +217,12 @@ function PlanTemplate() {
     <Grid className={classes.planTemplate}>
       <Grid className={classes.templateProfileContainer}>
         <Grid className={classes._spaceAround}>
-          <img src={'/driver.png'} className={classes.img} />
+          <img
+            src={`/avatars/img_profile_${
+              Math.floor(Math.random() * 11) + 1
+            }.png`}
+            className={classes.img}
+          />
           <Grid className={classes._column}>
             <Typography>Soojin Hwang</Typography>
             <Typography className={classes.desc}>with children</Typography>

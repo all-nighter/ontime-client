@@ -302,11 +302,16 @@ function PlanTemplate(props) {
     <Grid className={classes.planTemplate}>
       <Grid className={classes.templateProfileContainer}>
         <Grid className={classes._spaceAround}>
-          <img src={'/driver.png'} className={classes.img} />
+          <img
+            src={`/avatars/img_profile_${
+              Math.floor(Math.random() * 11) + 1
+            }.png`}
+            className={classes.img}
+          />
           <Grid className={classes._column}>
             <Typography>{props.data.user?.name}</Typography>
             <Typography className={classes.desc}>
-              {props.data.user?.email}
+              {props.data.user?.phoneNumber}
             </Typography>
           </Grid>
         </Grid>
@@ -476,36 +481,32 @@ function ListMode() {
   );
 }
 
-
-function toMinute (time) {
-  return parseInt(time / 60)
+function toMinute(time) {
+  return parseInt(time / 60);
 }
 
 async function handleCheckRoute(props) {
+  console.log('propsss', props.data);
+  await fetch(`${API_PREFIX}/driver/approve-schedule`, {
+    method: 'POST',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      email: localStorage.getItem('email'),
+      subscriptionId: props.data._id,
+    }),
+  });
 
-  console.log('propsss', props.data)
-    await fetch(`${API_PREFIX}/driver/approve-schedule`, {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-      },
-      body: JSON.stringify({email: localStorage.getItem('email'), subscriptionId: props.data._id })
-    })
+  const startLat = props.data.departureLocationPoint.lat;
+  const startLng = props.data.departureLocationPoint.lng;
 
-      
+  const destLat = props.data.destinationLocationPoint.lat;
+  const destLng = props.data.destinationLocationPoint.lng;
 
-    const startLat = props.data.departureLocationPoint.lat
-    const startLng = props.data.departureLocationPoint.lng
+  const eta = toMinute(props.data.estimatedTimeSeconds);
 
-    const destLat =  props.data.destinationLocationPoint.lat
-    const destLng =  props.data.destinationLocationPoint.lng
-
-    const eta = toMinute(props.data.estimatedTimeSeconds)
-
-  location.href = 
-    `/driver/route?userName=${props.data.user.name}&phone=${props.data.user.phoneNumber}&startLat=${startLat}&startLng=${startLng}&destLat=${destLat}&destLng=${destLng}&eta=${eta}`
-
-
+  location.href = `/driver/route?userName=${props.data.user.name}&phone=${props.data.user.phoneNumber}&startLat=${startLat}&startLng=${startLng}&destLat=${destLat}&destLng=${destLng}&eta=${eta}`;
 }
 
 function ListContent(props) {
@@ -515,11 +516,16 @@ function ListContent(props) {
     <Grid className={`${classes.planTemplate} ${classes.scheduleContainer}`}>
       <Grid className={classes.templateProfileContainer}>
         <Grid className={classes._spaceAround}>
-          <img src={'/driver.png'} className={classes.img} />
+          <img
+            src={`/avatars/img_profile_${
+              Math.floor(Math.random() * 11) + 1
+            }.png`}
+            className={classes.img}
+          />
           <Grid className={classes._column}>
             <Typography>{props.data?.user?.name}</Typography>
             <Typography className={classes.desc}>
-              {props.data.user.email}
+              {props.data.user.phoneNumber}
             </Typography>
           </Grid>
         </Grid>
@@ -546,7 +552,13 @@ function ListContent(props) {
         </Grid>
       </Grid>
       <Grid className={classes.buttonContainer}>
-        <Button className={classes.got} onClick={async () => await handleCheckRoute(props)}> Accept </Button>
+        <Button
+          className={classes.got}
+          onClick={async () => await handleCheckRoute(props)}
+        >
+          {' '}
+          Accept{' '}
+        </Button>
         <Button className={classes.ignore}>Ignore</Button>
       </Grid>
     </Grid>
