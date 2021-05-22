@@ -34,7 +34,7 @@
 }
 
 .searchTitleContainer {
-    height: 20%;
+    height: 15%;
     display: flex;
     align-items: center;
     justify-content: center; /* Horizontal center alignment */
@@ -72,16 +72,24 @@
 }
 
 .timeSelectHeader {
-    margin-top : 1rem;
-    margin-left: 3.2rem;
+    /* margin-top : 1rem;
+    margin-left: 3.2rem; */
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 1vw;
 }
 
 .timeContainer {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .timeInput {
     width: 100px;
+    border: none;
+    background-color: #FFFFFF;
 }
 
 .daySelectContainer {
@@ -116,11 +124,11 @@
     justify-content: center;
     background: #FFFFFF;
     border-radius: 10px;
-    height: 50px;
+    height: 40px;
     margin:auto;
-    margin-left: 1px;
-    margin-right: 1px;
-    width: 25%;
+    margin-left: 2px;
+    margin-right: 2px;
+    width: 20%;
 
 }
 
@@ -129,19 +137,28 @@
     line-height: 10px;
 }
 
+.numDayContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .selected {
     background-color:#00B5CE !important;
 }
 
 
 .buttonsContainer {
-    padding: 20px;
+    padding: 5px;
 }
 .buttonContainer {
     background: #00B5CE;
+    color: #FFFFFF !important;
     border-radius: 8px;
-    margin-top: 1rem;
 }
 .button {
-    width: 100%
+    width: 100%;
+    color: #FFFFFF !important;
+    height: 30px;
+    border-radius: 50vw;
 }
