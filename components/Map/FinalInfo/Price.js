@@ -18,8 +18,10 @@ const Price = () => {
     ...MapContext.getMapContext(),
   });
 
+
   MapContext.renderSubmit = () => {
-    setSubmission({ ...submission, ...MapContext.getMapContext() });
+      console.log('being rendered')
+        setSubmission({ ...submission, ...MapContext.getMapContext() });
   };
 
   const stripe = useStripe();
@@ -41,11 +43,14 @@ const Price = () => {
   };
 
   const handleSubmit = async () => {
+
+
     const params = {
       ...submission,
+      estimatedTimeSeconds: MapContext.getMapContext().estimatedTimeSeconds,
       email: localStorage.getItem('email'),
     };
-    console.log('params:', params);
+
     let response = await fetch(`${API_PREFIX}/user/subscription`, {
       method: 'POST',
       headers: {

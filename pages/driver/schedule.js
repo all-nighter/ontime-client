@@ -478,11 +478,22 @@ function ListMode() {
 
 
 function toMinute (time) {
-  parseInt(time / 60)
+  return parseInt(time / 60)
 }
-function handleCheckRoute(props) {
 
-  console.log(props.data)
+async function handleCheckRoute(props) {
+
+  console.log('propsss', props.data)
+    await fetch(`${API_PREFIX}/driver/approve-schedule`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({email: localStorage.getItem('email'), subscriptionId: props.data._id })
+    })
+
+      
+
     const startLat = props.data.departureLocationPoint.lat
     const startLng = props.data.departureLocationPoint.lng
 
@@ -490,7 +501,6 @@ function handleCheckRoute(props) {
     const destLng =  props.data.destinationLocationPoint.lng
 
     const eta = toMinute(props.data.estimatedTimeSeconds)
-
 
   location.href = 
     `/driver/route?userName=${props.data.user.name}&phone=${props.data.user.phoneNumber}&startLat=${startLat}&startLng=${startLng}&destLat=${destLat}&destLng=${destLng}&eta=${eta}`
@@ -536,7 +546,7 @@ function ListContent(props) {
         </Grid>
       </Grid>
       <Grid className={classes.buttonContainer}>
-        <Button className={classes.got} onClick={() =>  handleCheckRoute(props)}> Accept </Button>
+        <Button className={classes.got} onClick={async () => await handleCheckRoute(props)}> Accept </Button>
         <Button className={classes.ignore}>Ignore</Button>
       </Grid>
     </Grid>

@@ -15,9 +15,9 @@ const MainSearch = (props) => {
     MapContext.setContext('mapType', 1);
     MapContext.renderMapType();
     MapContext.renderAgain();
+    MapContext.renderSubmit();
     MapContext.renderEstimatedTime();
     MapContext.renderFrequency();
-    MapContext.renderSubmit();
   };
 
   return (

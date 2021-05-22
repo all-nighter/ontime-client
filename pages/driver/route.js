@@ -67,7 +67,7 @@ const Route = () => {
                             </Grid>
                             <Grid item xs={4}>
                                 <p> $30.00</p>
-                                <p> ETA: {mapState.eta}</p>
+                                <p> ETA: {mapState.eta} Min</p>
                             </Grid>
 
                         </Grid>
