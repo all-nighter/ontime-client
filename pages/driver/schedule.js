@@ -304,12 +304,14 @@ function PlanTemplate(props) {
         <Grid className={classes._spaceAround}>
           <img src={'/driver.png'} className={classes.img} />
           <Grid className={classes._column}>
-            <Typography>Soojin Hwang</Typography>
-            <Typography className={classes.desc}>with children</Typography>
+            <Typography>{props.data.user?.name}</Typography>
+            <Typography className={classes.desc}>
+              {props.data.user?.email}
+            </Typography>
           </Grid>
         </Grid>
         <Grid className={`${classes._column} ${classes.arriveTime}`}>
-          AM 08:45
+          {props.data?.hour}:{props.data?.minute}
         </Grid>
       </Grid>
       <Grid>
@@ -326,7 +328,7 @@ function PlanTemplate(props) {
           <Typography
             className={`${classes._textAlignLeft} ${classes._smallText}`}
           >
-            Drop Off: {props.data.destination}
+            Drop Off: {props.data?.destination}
           </Typography>
         </Grid>
       </Grid>
@@ -429,7 +431,7 @@ function ScheduleMode() {
     <Grid className={classes.contentContainer}>
       <Grid>
         <Typography className={classes.passenger}>Today's Passenger</Typography>
-        <Typography className={classes.textLeft}>Have a save ride!</Typography>
+        <Typography className={classes.textLeft}>Have a safe ride!</Typography>
       </Grid>
       {days.map((x) => (
         <Schedule day={x} data={data} />
@@ -476,19 +478,21 @@ function ListMode() {
 
 function ListContent(props) {
   const classes = useStyles();
-  console.log(props.data);
+  console.log('ListContent =>', props.data);
   return (
     <Grid className={`${classes.planTemplate} ${classes.scheduleContainer}`}>
       <Grid className={classes.templateProfileContainer}>
         <Grid className={classes._spaceAround}>
           <img src={'/driver.png'} className={classes.img} />
           <Grid className={classes._column}>
-            <Typography>Soojin Hwang</Typography>
-            <Typography className={classes.desc}>with children</Typography>
+            <Typography>{props.data?.user?.name}</Typography>
+            <Typography className={classes.desc}>
+              {props.data.user.email}
+            </Typography>
           </Grid>
         </Grid>
         <Grid className={`${classes._column} ${classes.arriveTime}`}>
-          AM 08:45
+          {props.data?.hour}:{props.data?.minute}
         </Grid>
       </Grid>
       <Grid>
@@ -497,7 +501,7 @@ function ListContent(props) {
           <Typography
             className={`${classes._textAlignLeft} ${classes._smallText}`}
           >
-            Pick Up: Seoul
+            Pick Up: {props.data?.departure}
           </Typography>
         </Grid>
         <Grid className={classes._row}>
@@ -505,7 +509,7 @@ function ListContent(props) {
           <Typography
             className={`${classes._textAlignLeft} ${classes._smallText}`}
           >
-            Drop Off: Amazon
+            Drop Off: {props.data?.destination}
           </Typography>
         </Grid>
       </Grid>
