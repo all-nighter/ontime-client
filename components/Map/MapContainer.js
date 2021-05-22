@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 import {GoogleMap, LoadScript, Marker} from '@react-google-maps/api'
 
-const MapContainer = () => {
+const MapContainer = () => { 
 
     const mapStyles = {        
       height: "100vh",
@@ -10,7 +10,7 @@ const MapContainer = () => {
     };
     
     const [currentPosition, setCurrentPosition] = useState({
-      lat: 41.3851, lng: 2.1734
+      lat: 0, lng: 0
     })
 
     console.log('current position', currentPosition)
@@ -20,6 +20,25 @@ const MapContainer = () => {
         const lng = e.latLng.lng();
         setCurrentPosition({ lat, lng})
     };
+
+    function success(pos) {
+      var crd = pos.coords;
+  
+      console.log('Your current position is:');
+      console.log(`Latitude : ${crd.latitude}`);
+      console.log(`Longitude: ${crd.longitude}`);
+      console.log(`More or less ${crd.accuracy} meters.`);
+  
+      setCurrentPosition({lat: crd.latitude, lng: crd.longitude})
+    }
+  
+    function error(err) {
+      console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+  
+    useEffect( () => {
+      navigator.geolocation.getCurrentPosition(success, error);
+    }, [])
 
 
   return (
