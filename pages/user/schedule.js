@@ -148,6 +148,12 @@ const useStyles = makeStyles((theme) => ({
   scheduleContainer: {
     marginBottom: '3vh',
   },
+  flex: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '80vw',
+  },
 }));
 
 function Header() {
@@ -164,9 +170,15 @@ function Header() {
         </Link>
       </Grid>
       <Grid className={classes.upcomingEventContainer}>
-        <Typography className={classes._bold}>
-          cab is ariving in 30 minutes!
-        </Typography>
+        <Grid className={classes.flex}>
+          <img
+            src={'/notification.png'}
+            className={`${classes.icon} ${classes.padding}`}
+          />
+          <Typography className={classes._bold}>
+            cab is ariving in 30 minutes!
+          </Typography>
+        </Grid>
       </Grid>
     </Grid>
   );
