@@ -112,7 +112,7 @@ function App() {
   const [isUser, setIsUser] = useState(false);
   const [isDriver, setIsDriver] = useState(false);
   return (
-    <MainLayout>
+    <MainLayout hideFooter={true}>
       {!isUser && !isDriver && (
         <SelectUserDriver setIsUser={setIsUser} setIsDriver={setIsDriver} />
       )}

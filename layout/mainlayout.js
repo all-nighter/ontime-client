@@ -54,12 +54,12 @@ const useStyles = makeStyles((theme) => ({
   },
   mainGrid: {
     width: '100vw',
-    height: '90vh',
+    height: '100vh',
     spacing: 0,
     justify: 'space-around',
   },
   middleGrid: {
-    height: '80vh',
+    height: '100vh',
     spacing: 0,
     direction: 'column',
     textAlign: 'center',
@@ -79,31 +79,46 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     width: '100vw',
     display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  header: {
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+    color: 'black',
+    display: 'flex',
+    justifyContent: 'center',
+    height: '7vh',
   },
 }));
 
 function MainLayout(props) {
   const classes = useStyles();
-  const { children } = props;
+  const { children, hideFooter, headerTitle } = props;
   return (
     <div className={classes.root}>
-      <Grid className={classes.appbar}></Grid>
+      {/* <Grid className={classes.appbar}></Grid> */}
+      {!!headerTitle && (
+        <AppBar className={classes.header}>{headerTitle}</AppBar>
+      )}
       <Grid className={classes.mainGrid}>
         <Grid className={classes.middleGrid} xs={12}>
           {children}
         </Grid>
       </Grid>
-      <Grid className={classes.footer}>
-        <Grid>
-          <Button>main</Button>
+      {/* {!hideFooter && (
+        <Grid className={classes.footer}>
+          <Grid>
+            <Button>main</Button>
+          </Grid>
+          <Grid>
+            <Button>match</Button>
+          </Grid>
+          <Grid>
+            <Button>profile</Button>
+          </Grid>
         </Grid>
-        <Grid>
-          <Button>match</Button>
-        </Grid>
-        <Grid>
-          <Button>profile</Button>
-        </Grid>
-      </Grid>
+      )} */}
     </div>
   );
 }

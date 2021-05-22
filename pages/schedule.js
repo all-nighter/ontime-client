@@ -22,10 +22,10 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   return (
-    <MainLayout hideFooter={true}>
+    <MainLayout headerTitle={'Schedule'}>
       <Grid className={classes.middleGrid}>
         <Link href="/login">
-          <Button>START!</Button>
+          <Button>Schedule</Button>
         </Link>
       </Grid>
     </MainLayout>
