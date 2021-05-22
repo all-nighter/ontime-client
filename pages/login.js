@@ -58,21 +58,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SelectUserDriver() {
+function SelectUserDriver(props) {
   const classes = useStyles();
 
   return (
     <Grid className={classes.middleGrid}>
       <Button
         onClick={() => {
-          setIsUser(true);
+          props.setIsUser(true);
         }}
       >
         User
       </Button>
       <Button
         onClick={() => {
-          setIsDriver(true);
+          props.setIsDriver(true);
         }}
       >
         Driver

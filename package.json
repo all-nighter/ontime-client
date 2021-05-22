@@ -9,14 +9,10 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.4",
-<<<<<<< HEAD
     "@material-ui/icons": "^4.11.2",
     "@stripe/react-stripe-js": "^1.4.1",
     "@stripe/stripe-js": "^1.15.0",
     "material-ui-dropzone": "^3.5.0",
-=======
-    "@react-google-maps/api": "^2.2.0",
->>>>>>> origin/google_map
     "next": "10.2.0",
     "next-connect": "^0.10.1",
     "prop-types": "^15.7.2",
