@@ -63,9 +63,9 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   return (
-    // <MainLayout>
-    <MapContainer />
-    // </MainLayout>
+    <MainLayout>
+      <MapContainer />
+    </MainLayout>
   );
 }
 
