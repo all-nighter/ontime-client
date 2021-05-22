@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   return (
-    <MainLayout>
+    <MainLayout hideFooter={true}>
       <Grid className={classes.middleGrid}>
         <Link href="/login">
           <Button>START!</Button>

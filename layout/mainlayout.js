@@ -86,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
 
 function MainLayout(props) {
   const classes = useStyles();
-  const { children } = props;
+  const { children, hideFooter } = props;
   return (
     <div className={classes.root}>
       <Grid className={classes.appbar}></Grid>
@@ -95,17 +95,19 @@ function MainLayout(props) {
           {children}
         </Grid>
       </Grid>
-      <Grid className={classes.footer}>
-        <Grid>
-          <Button>main</Button>
+      {!hideFooter && (
+        <Grid className={classes.footer}>
+          <Grid>
+            <Button>main</Button>
+          </Grid>
+          <Grid>
+            <Button>match</Button>
+          </Grid>
+          <Grid>
+            <Button>profile</Button>
+          </Grid>
         </Grid>
-        <Grid>
-          <Button>match</Button>
-        </Grid>
-        <Grid>
-          <Button>profile</Button>
-        </Grid>
-      </Grid>
+      )}
     </div>
   );
 }
