@@ -103,7 +103,10 @@ function UserSignup(props) {
 
   useEffect(() => {
     console.log(name);
-  }, [name]);
+    console.log(email);
+    console.log(phoneNumber);
+    console.log(password);
+  }, [name, email, phoneNumber, password]);
 
   return (
     <Grid className={classes.middleGrid} container spacing={3}>
@@ -136,21 +139,26 @@ function UserSignup(props) {
         </Grid>
         <Button
           onClick={() => {
+            const params = {
+              name,
+              email,
+              phoneNumber,
+              password,
+            };
+            console.log('params:', params);
             fetch(`${API_PREFIX}/user/signup`, {
               method: 'POST',
               headers: {
                 'content-type': 'application/json',
               },
-              body: JSON.stringify({
-                name,
-                email,
-                phoneNumber,
-                password,
-              }),
+              body: JSON.stringify(params),
             })
               .then((res) => res.json())
               .then((data) => {
                 console.log(data);
+              })
+              .catch((e) => {
+                alert(e);
               });
           }}
         >
