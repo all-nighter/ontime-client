@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
   mainGrid: {
     width: '100vw',
-    height: '90vh',
+    height: '100vh',
     spacing: 0,
     justify: 'space-around',
   },
@@ -82,14 +82,25 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     alignItems: 'center',
   },
+  header: {
+    backgroundColor: 'transparent',
+    textAlign: 'center',
+    color: 'black',
+    display: 'flex',
+    justifyContent: 'center',
+    height: '7vh',
+  },
 }));
 
 function MainLayout(props) {
   const classes = useStyles();
-  const { children, hideFooter } = props;
+  const { children, hideFooter, headerTitle } = props;
   return (
     <div className={classes.root}>
       {/* <Grid className={classes.appbar}></Grid> */}
+      {!!headerTitle && (
+        <AppBar className={classes.header}>{headerTitle}</AppBar>
+      )}
       <Grid className={classes.mainGrid}>
         <Grid className={classes.middleGrid} xs={12}>
           {children}
