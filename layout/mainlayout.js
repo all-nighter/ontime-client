@@ -78,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     position: 'fixed',
     width: '100vw',
+    display: 'flex',
   },
 }));
 
@@ -92,7 +93,17 @@ function MainLayout(props) {
           {children}
         </Grid>
       </Grid>
-      <Grid className={classes.footer}></Grid>
+      <Grid className={classes.footer}>
+        <Grid>
+          <Button>main</Button>
+        </Grid>
+        <Grid>
+          <Button>match</Button>
+        </Grid>
+        <Grid>
+          <Button>profile</Button>
+        </Grid>
+      </Grid>
     </div>
   );
 }
