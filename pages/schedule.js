@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
   dateContainer: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     // spacing: 1,
   },
@@ -84,9 +84,10 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
   },
   img: {
-    width: '20vw',
-    height: '20vw',
+    width: '15vw',
+    height: '15vw',
     borderRadius: '50vw',
+    marginRight: '5vw',
   },
   _spaceAround: {
     display: 'flex',
@@ -94,19 +95,40 @@ const useStyles = makeStyles((theme) => ({
   },
   planTemplate: {
     width: '100vw',
+    borderRadius: '5px',
+    boxShadow: '0 0 5px 5px #00000014',
+    padding: '3vw',
   },
   _textAlignLeft: {
     textAlign: 'left',
   },
   icon: {
-    width: '6vw',
-    marginLeft: '6vw',
+    width: '9vw',
+    marginLeft: '4vw',
     marginRight: '1vw',
   },
   _row: {
     display: 'flex',
     alignItems: 'center',
     margin: '1vw',
+  },
+  desc: {
+    fontSize: '4vw',
+    color: 'grey',
+  },
+  month: {
+    fontSize: '6vw',
+    fontWeight: 'bold',
+  },
+  date: {
+    fontSize: '4vw',
+    fontWeight: 'bold',
+    color: 'grey',
+  },
+  book: { border: 'solid 1vw #8080804f' },
+  title: {
+    fontSize: '4vw',
+    fontWeight: 'bold',
   },
 }));
 
@@ -115,7 +137,7 @@ function Header() {
   return (
     <Grid className={classes.headerContainer}>
       <Grid className={classes.headerTitle}>
-        <Typography>Schedule</Typography>
+        <Typography className={classes.title}>SCHEDULE</Typography>
         <Link href="/main">
           <Button className={classes.toMap}>map</Button>
         </Link>
@@ -168,7 +190,7 @@ function NoPlanTemplate() {
       </Grid>
       <Grid>
         <Link href="/main">
-          <Button>Book A Ride</Button>
+          <Button className={classes.book}>Book A Ride</Button>
         </Link>
       </Grid>
     </Grid>
@@ -184,7 +206,7 @@ function PlanTemplate() {
           <img src={'/driver.png'} className={classes.img} />
           <Grid className={classes._column}>
             <Typography>Soojin Hwang</Typography>
-            <Typography>with children</Typography>
+            <Typography className={classes.desc}>with children</Typography>
           </Grid>
         </Grid>
         <Grid className={classes._column}>AM 08:45</Grid>
@@ -214,14 +236,14 @@ function Scedule(props) {
     <React.Fragment>
       <Grid>
         <Grid className={classes.dateContainer}>
-          <Typography className={`${classes._padding}`}>
+          <Typography className={`${classes._padding} ${classes.month}`}>
             {daysMap[props.day?.day]}
           </Typography>
           <Typography className={`${classes._padding}`}> - </Typography>
-          <Typography className={`${classes._padding}`}>
+          <Typography className={`${classes._padding} ${classes.date}`}>
             {props.day?.date}
           </Typography>
-          <Typography className={`${classes._padding}`}>
+          <Typography className={`${classes._padding} ${classes.date}`}>
             {monthMap[props.day?.month]}
           </Typography>
         </Grid>
