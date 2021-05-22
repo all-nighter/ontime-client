@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -25,25 +25,27 @@ const useStyles = makeStyles((theme) => ({
     width: '100vw',
     display: 'flex',
     flexDirection: 'column',
-    flexGrow: 1,
+    // flexGrow: 1,
     boxShadow: '0 0 10px 10px #00000014',
     borderRadius: '0 0 15px 15px',
-    height: '20vh',
+    height: '15vh',
   },
   headerTitle: {
-    flexGrow: 1,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  upcomingEventContainer: {
     flexGrow: 2,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  upcomingEventContainer: {
+    flexGrow: 1,
+    display: 'flex',
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    width: '100vw',
+  },
   contentContainer: {
-    flexGrow: 5,
+    // flexGrow: 5,
+    height: '85vh',
     width: '100vw',
     padding: '5vw',
     overflow: 'scroll',
@@ -76,6 +78,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'column',
   },
   _column: {
     display: 'flex',
@@ -147,14 +150,72 @@ const useStyles = makeStyles((theme) => ({
   scheduleContainer: {
     marginBottom: '3vh',
   },
+  navbar: {
+    width: '100vw',
+    display: 'flex',
+    justifyContent: 'space-around',
+    // alignItems: 'stretch',
+  },
+  navbarContent: {
+    width: '50vw',
+    '&:hover': {
+      backgroundColor: mint,
+      color: '#fff',
+    },
+  },
+  active: {
+    backgroundColor: mint,
+    color: '#fff',
+  },
+  passenger: {
+    color: mint,
+    fontWeight: 'bold',
+    fontSize: '6vw',
+    textAlign: 'left',
+  },
+  textLeft: {
+    textAlign: 'left',
+    fontSize: '3vw',
+  },
+  dateInput: {
+    border: 'none',
+    backgroundColor: 'transparent',
+    color: mint,
+    height: '5vh',
+    fontSize: '4vw',
+  },
+  got: {
+    backgroundColor: mint,
+    color: '#fff',
+    marginLeft: '5vw',
+    marginRight: '5vw',
+    '&:hover': {
+      backgroundColor: mint,
+      color: '#fff',
+    },
+  },
+  ignore: {
+    color: 'grey',
+    marginLeft: '5vw',
+    marginRight: '5vw',
+    '&:hover': {
+      backgroundColor: '#fff',
+      color: 'grey',
+    },
+  },
+  buttonContainer: {
+    display: 'flex',
+    width: '100vw',
+    justifyContent: 'center',
+  },
 }));
 
-function Header() {
+function Header(props) {
   const classes = useStyles();
   return (
     <Grid className={classes.headerContainer}>
       <Grid className={classes.headerTitle}>
-        <Typography className={classes.title}>SCHEDULE</Typography>
+        {/* <Typography className={classes.title}>SCHEDULE</Typography> */}
         <Link href="/main">
           <Button className={classes.toMap}>
             <img src={'/navigate_before.png'} />
@@ -163,9 +224,24 @@ function Header() {
         </Link>
       </Grid>
       <Grid className={classes.upcomingEventContainer}>
-        <Typography className={classes._bold}>
-          cab is ariving in 30 minutes!
-        </Typography>
+        <Grid className={classes.navbar}>
+          <Button
+            className={`${classes.navbarContent} ${
+              props.isSchedule && classes.active
+            }`}
+            onClick={() => props.setIsSchedule(true)}
+          >
+            Schedule
+          </Button>
+          <Button
+            className={`${classes.navbarContent} ${
+              !props.isSchedule && classes.active
+            }`}
+            onClick={() => props.setIsSchedule(false)}
+          >
+            List
+          </Button>
+        </Grid>
       </Grid>
     </Grid>
   );
@@ -191,13 +267,13 @@ const data = [
 
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const daysMap = {
+  0: 'Sun',
   1: 'Mon',
   2: 'Tue',
   3: 'Wed',
   4: 'Thu',
   5: 'Fri',
   6: 'Sat',
-  7: 'Sun',
 };
 const monthMap = {
   4: 'May',
@@ -303,18 +379,23 @@ function checkSchedule(day, subscriptions) {
   return false;
 }
 
-function Content() {
+function ScheduleMode() {
   const classes = useStyles();
   const now = new Date();
+  console.log('now:', now.getDay(), now.getDate(), now.getMonth());
   const days = [];
   for (let i = 0; i < 7; i++) {
-    const day = ((now.getDay() + i) % 8) + Math.floor((now.getDay() + i) / 8);
-    const date = now.getDate() + i;
+    const day = (now.getDay() + i) % 7;
+    const date = (now.getDate() + i) % 30;
     const month = now.getMonth() + Math.floor(date / 30);
     days.push({ day, date, month });
   }
   return (
     <Grid className={classes.contentContainer}>
+      <Grid>
+        <Typography className={classes.passenger}>Today's Passenger</Typography>
+        <Typography className={classes.textLeft}>Have a save ride!</Typography>
+      </Grid>
       {days.map((x) => (
         <Schedule day={x} data={data} />
       ))}
@@ -322,13 +403,72 @@ function Content() {
   );
 }
 
+function ListMode() {
+  const classes = useStyles();
+  const now = new Date();
+
+  return (
+    <Grid className={classes.contentContainer}>
+      <input type="date" className={classes.dateInput} value="2021-05-23" />
+      <Grid className={`${classes.templateContainer}`}>
+        <ListContent />
+        <ListContent />
+      </Grid>
+    </Grid>
+  );
+}
+
+function ListContent(props) {
+  const classes = useStyles();
+  return (
+    <Grid className={`${classes.planTemplate} ${classes.scheduleContainer}`}>
+      <Grid className={classes.templateProfileContainer}>
+        <Grid className={classes._spaceAround}>
+          <img src={'/driver.png'} className={classes.img} />
+          <Grid className={classes._column}>
+            <Typography>Soojin Hwang</Typography>
+            <Typography className={classes.desc}>with children</Typography>
+          </Grid>
+        </Grid>
+        <Grid className={`${classes._column} ${classes.arriveTime}`}>
+          AM 08:45
+        </Grid>
+      </Grid>
+      <Grid>
+        <Grid className={classes._row}>
+          <img src={'/departure.png'} className={classes.icon} />
+          <Typography
+            className={`${classes._textAlignLeft} ${classes._smallText}`}
+          >
+            Pick Up: Seoul
+          </Typography>
+        </Grid>
+        <Grid className={classes._row}>
+          <img src={'/Vector.png'} className={classes.icon} />
+          <Typography
+            className={`${classes._textAlignLeft} ${classes._smallText}`}
+          >
+            Drop Off: Amazon
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid className={classes.buttonContainer}>
+        <Button className={classes.got}>Got</Button>
+        <Button className={classes.ignore}>ignore</Button>
+      </Grid>
+    </Grid>
+  );
+}
+
 function App() {
   const classes = useStyles();
+  const [isSchedule, setIsSchedule] = useState(true);
   return (
     <MainLayout headerTitle={'Schedule'}>
       <Grid className={classes.middleGrid}>
-        <Header />
-        <Content />
+        <Header setIsSchedule={setIsSchedule} isSchedule={isSchedule} />
+        {!!isSchedule && <ScheduleMode />}
+        {!!!isSchedule && <ListMode />}
       </Grid>
     </MainLayout>
   );

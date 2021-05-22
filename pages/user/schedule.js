@@ -25,10 +25,10 @@ const useStyles = makeStyles((theme) => ({
     width: '100vw',
     display: 'flex',
     flexDirection: 'column',
-    flexGrow: 1,
+    // flexGrow: 1,
     boxShadow: '0 0 10px 10px #00000014',
     borderRadius: '0 0 15px 15px',
-    height: '20vh',
+    height: '15vh',
   },
   headerTitle: {
     flexGrow: 1,
@@ -43,7 +43,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   contentContainer: {
-    flexGrow: 5,
+    // flexGrow: 5,
+    height: '85vh',
     width: '100vw',
     padding: '5vw',
     overflow: 'scroll',
