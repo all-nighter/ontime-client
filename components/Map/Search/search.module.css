@@ -123,11 +123,11 @@
     flex-direction: column;
     justify-content: center;
     background: #FFFFFF;
-    border-radius: 10px;
+    border-radius: 15px;
     height: 40px;
     margin:auto;
-    margin-left: 2px;
-    margin-right: 2px;
+    margin-left: 3px;
+    margin-right: 3px;
     width: 20%;
 
 }
