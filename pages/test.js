@@ -1,12 +1,11 @@
-import { latLng2Tile } from 'google-map-react';
-import Map from '../components/Map'
+import MapContainer from '../components/Map/MapContainer'
 
 
 const Test = () => {
 
     return (
         <div>
-            <Map/>
+            <MapContainer/>
         </div>
     )
 }
