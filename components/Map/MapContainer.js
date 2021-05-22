@@ -7,14 +7,9 @@ import MapContext from './MapContext'
 import MainSearch from './Search/MainSearch'
 
 const MapContainer = () => {
-  const mapStyles = {
-    height: '100vh',
-    width: '100%',
-  };
-
-    const mapStyles = {        
-      height: "60vh",
-      width: "100%"
+    const mapStyles = {
+      height: '100vh',
+      width: '100%',
     };
     
     const [currentPosition, setCurrentPosition] = useState({
