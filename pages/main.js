@@ -46,6 +46,7 @@ import { useRouter } from 'next/router';
 import { Elements, useStripe } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import MainLayout from '../layout/mainlayout';
+import MapContainer from '../components/Map/MapContainer';
 
 const useStyles = makeStyles((theme) => ({
   middleGrid: {
@@ -62,9 +63,9 @@ const useStyles = makeStyles((theme) => ({
 function App() {
   const classes = useStyles();
   return (
-    <MainLayout>
-      <Typography>Main Page</Typography>
-    </MainLayout>
+    // <MainLayout>
+    <MapContainer />
+    // </MainLayout>
   );
 }
 

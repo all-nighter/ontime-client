@@ -55,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'column',
   },
 }));
 
@@ -81,17 +82,42 @@ function SelectUserDriver(props) {
   );
 }
 
+function UserLogin() {
+  const classes = useStyles();
+  return (
+    <Grid className={classes.middleGrid}>
+      <Input placeholder={'id'} />
+      <Input placeholder={'password'} />
+      <Link href="/main">
+        <Button>Login</Button>
+      </Link>
+    </Grid>
+  );
+}
+
+function DriverLogin() {
+  const classes = useStyles();
+  return (
+    <Grid className={classes.middleGrid}>
+      <Input placeholder={'id'} />
+      <Input placeholder={'password'} />
+      <Link href="/main">
+        <Button>Login</Button>
+      </Link>
+    </Grid>
+  );
+}
+
 function App() {
   const [isUser, setIsUser] = useState(false);
   const [isDriver, setIsDriver] = useState(false);
   return (
     <MainLayout>
       {!isUser && !isDriver && (
-        <SelectUserDriver
-          setIsUser={setIsUser}
-          setIsDriver={setIsDriver}
-        ></SelectUserDriver>
+        <SelectUserDriver setIsUser={setIsUser} setIsDriver={setIsDriver} />
       )}
+      {isUser && <UserLogin />}
+      {isDriver && <DriverLogin />}
     </MainLayout>
   );
 }
