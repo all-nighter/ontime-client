@@ -162,3 +162,8 @@
     height: 30px;
     border-radius: 50vw;
 }
+.toSchedule {
+    color: #00B5CE;
+    position: fixed;
+    left: 0
+}
