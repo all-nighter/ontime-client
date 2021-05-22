@@ -1,61 +1,33 @@
 import React, { useEffect, useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import Menu from '@material-ui/core/Menu';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  Divider,
-  LinearProgress,
-  Slider,
-  Input,
-} from '@material-ui/core';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import TextField from '@material-ui/core/TextField';
+import { Input } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
-import WarningIcon from '@material-ui/icons/Warning';
-import HelpIcon from '@material-ui/icons/Help';
-import CardMedia from '@material-ui/core/CardMedia';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import { useRouter } from 'next/router';
-import { Elements, useStripe } from '@stripe/react-stripe-js';
-import { loadStripe } from '@stripe/stripe-js';
 import Link from 'next/link';
 import MainLayout from '../layout/mainlayout';
+import { API_PREFIX } from '../../env';
 
 const useStyles = makeStyles((theme) => ({
   middleGrid: {
     height: '80vh',
-    spacing: 0,
+    spacing: 3,
     direction: 'column',
     textAlign: 'center',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'column',
+  },
+  inputContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  signinContainer: {
+    display: 'flex',
+    flexGrow: 3,
+    alignItems: 'center',
   },
 }));
 
@@ -82,28 +54,134 @@ function SelectUserDriver(props) {
   );
 }
 
-function UserLogin() {
-  const classes = useStyles();
+function UserField() {
+  const [isSignup, setIsSignup] = useState(false);
   return (
-    <Grid className={classes.middleGrid}>
-      <Input placeholder={'id'} />
-      <Input placeholder={'password'} />
-      <Link href="/main">
-        <Button>Login</Button>
-      </Link>
+    <Grid>
+      <Grid>
+        <Typography>User</Typography>
+      </Grid>
+      {!!isSignup && <UserSignup setIsSignup={setIsSignup} />}
+      {!!!isSignup && <UserLogin setIsSignup={setIsSignup} />}
     </Grid>
   );
 }
 
-function DriverLogin() {
+function UserLogin(props) {
+  const classes = useStyles();
+  return (
+    <Grid className={classes.middleGrid} container spacing={3}>
+      <Grid className={classes.signinContainer}>
+        <Grid className={classes.inputContainer}>
+          <Input placeholder={'id'} />
+          <Input placeholder={'password'} />
+        </Grid>
+        <Link href="/main">
+          <Button>Login</Button>
+        </Link>
+      </Grid>
+      <Grid>
+        <Typography>Don't have an account yet?</Typography>
+        <Button
+          onClick={() => {
+            props.setIsSignup(true);
+          }}
+        >
+          SignUp
+        </Button>
+      </Grid>
+    </Grid>
+  );
+}
+
+function UserSignup(props) {
+  const classes = useStyles();
+  const [name, setName] = useState();
+  const [email, setEmail] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [password, setPassword] = useState();
+
+  useEffect(() => {
+    console.log(name);
+  }, [name]);
+
+  return (
+    <Grid className={classes.middleGrid} container spacing={3}>
+      <Grid className={classes.signinContainer}>
+        <Grid className={classes.inputContainer}>
+          <Input
+            placeholder={'name'}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
+          />
+          <Input
+            placeholder={'email'}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <Input
+            placeholder={'phoneNumber'}
+            onChange={(e) => {
+              setPhoneNumber(e.target.value);
+            }}
+          />
+          <Input
+            placeholder={'password'}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+        </Grid>
+        <Button
+          onClick={() => {
+            fetch(`${API_PREFIX}/user/signup`, {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json',
+              },
+              body: JSON.stringify({
+                name,
+                email,
+                phoneNumber,
+                password,
+              }),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log(data);
+              });
+          }}
+        >
+          SignUp
+        </Button>
+      </Grid>
+      <Grid>
+        <Typography>Already have an account?</Typography>
+        <Button
+          onClick={() => {
+            props.setIsSignup(false);
+          }}
+        >
+          Login
+        </Button>
+      </Grid>
+    </Grid>
+  );
+}
+
+function DriverField() {
   const classes = useStyles();
   return (
     <Grid className={classes.middleGrid}>
-      <Input placeholder={'id'} />
-      <Input placeholder={'password'} />
-      <Link href="/main">
-        <Button>Login</Button>
-      </Link>
+      <Grid className={classes.signinContainer}>
+        <Input placeholder={'id'} />
+        <Input placeholder={'password'} />
+        <Link href="/main">
+          <Button>Login</Button>
+        </Link>
+      </Grid>
     </Grid>
   );
 }
@@ -116,8 +194,8 @@ function App() {
       {!isUser && !isDriver && (
         <SelectUserDriver setIsUser={setIsUser} setIsDriver={setIsDriver} />
       )}
-      {isUser && <UserLogin />}
-      {isDriver && <DriverLogin />}
+      {isUser && <UserField />}
+      {isDriver && <DriverField />}
     </MainLayout>
   );
 }

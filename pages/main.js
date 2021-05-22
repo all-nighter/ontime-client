@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import MapContainer from '../components/Map/MapContainer';
 
-import MainLayout from '../layout/mainlayout'
+import MainLayout from '../layout/mainlayout';
+import { database } from '../lib/firebase';
+console.log('database:', database);
 
 const useStyles = makeStyles((theme) => ({
   middleGrid: {
@@ -18,13 +20,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App() {
-
   const classes = useStyles();
 
   const [path, setPath] = useState({
     start: {},
-    destination: {}
-  })
+    destination: {},
+  });
 
   return (
     <MainLayout>
