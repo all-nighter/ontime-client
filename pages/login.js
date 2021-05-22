@@ -69,6 +69,8 @@ function UserField() {
 
 function UserLogin(props) {
   const classes = useStyles();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
   return (
     <Grid className={classes.middleGrid} container spacing={3}>
       <Grid className={classes.signinContainer}>
@@ -76,9 +78,29 @@ function UserLogin(props) {
           <Input placeholder={'id'} />
           <Input placeholder={'password'} />
         </Grid>
-        <Link href="/main">
-          <Button>Login</Button>
-        </Link>
+        {/* <Link href="/main"> */}
+        <Button
+          onClick={() => {
+            fetch(`${API_PREFIX}/user/login`, {
+              method: 'POST',
+              headers: {
+                'content-type': 'application/json',
+              },
+              body: JSON.stringify({ email, password }),
+            }).then((res) => {
+              if (res.status === 200) {
+                alert(email);
+                localStorage.setItem('email', email);
+                location.href = '/main';
+              } else {
+                alert('login failed');
+              }
+            });
+          }}
+        >
+          Login
+        </Button>
+        {/* </Link> */}
       </Grid>
       <Grid>
         <Typography>Don't have an account yet?</Typography>
@@ -153,9 +175,16 @@ function UserSignup(props) {
               },
               body: JSON.stringify(params),
             })
-              .then((res) => res.json())
-              .then((data) => {
-                console.log(data);
+              .then((res) => {
+                if (res.status === 200) {
+                  localStorage.setItem('email', email);
+                  location.href = '/main';
+                } else if (res.status === 409) {
+                  alert('this email already exists!');
+                } else {
+                  alert('signup failed! please try again');
+                }
+                return;
               })
               .catch((e) => {
                 alert(e);

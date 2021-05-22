@@ -3,10 +3,10 @@ const handler = nextConnect();
 const stripe = require('stripe')(
   'sk_test_51IQNkOKRDMM110U3xFjLfxDxhMFBYAIXxl62dnQeOTvijd362YgwoENDi8ZpK8ngAW0Gt3gMK4t7EBgKXuYod6J500ZESSAyH1',
 );
-console.log('stripe:', stripe);
 
 handler.post(async (req, res) => {
   const { priceId } = req.body;
+  console.log('priceId:', priceId);
 
   // See https://stripe.com/docs/api/checkout/sessions/create
   // for additional parameters to pass.
@@ -26,8 +26,7 @@ handler.post(async (req, res) => {
       // is redirected to the success page.
       // success_url: 'https://example.com/success.html?session_id={CHECKOUT_SESSION_ID}',,
       // cancel_url: 'https://example.com/canceled.html',
-      success_url:
-        'http://localhost:3000/my-page/pricing?session_id={CHECKOUT_SESSION_ID}',
+      success_url: 'http://localhost:3000/afterPayment',
       cancel_url: 'http://localhost:3000/my-page/pricing',
     });
 
