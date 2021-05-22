@@ -41,15 +41,17 @@ const Price = () => {
   };
 
   const handleSubmit = async () => {
+    const params = {
+      ...submission,
+      email: localStorage.getItem('email'),
+    };
+    console.log('params:', params);
     let response = await fetch(`${API_PREFIX}/user/subscription`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
       },
-      body: JSON.stringify({
-        ...submission,
-        email: localStorage.getItem('email'),
-      }),
+      body: JSON.stringify(params),
     });
 
     response = await response.json();

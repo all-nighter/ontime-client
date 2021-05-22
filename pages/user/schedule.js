@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Link from 'next/link';
 import MainLayout from '../../layout/mainlayout';
 import { Typography } from '@material-ui/core';
+import { API_PREFIX } from '../../env';
 
 const mint = '#00B5CE';
 
@@ -320,6 +321,26 @@ function Content() {
   const classes = useStyles();
   const now = new Date();
   const days = [];
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    const email = localStorage.getItem('email');
+    if (!email) {
+      alert('user athentication failed');
+      locations.href = '/login';
+    }
+    const fetchData = async () => {
+      let res = await fetch(`${API_PREFIX}/user/subscriptions?email=${email}`, {
+        method: 'GET',
+        headers: {
+          'content-type': 'application/json',
+        },
+      });
+      res = await res.json();
+      console.log(res.subscribed);
+      setData(res.subscribed);
+    };
+    fetchData();
+  });
   for (let i = 0; i < 7; i++) {
     const day = (now.getDay() + i) % 7;
     const date = now.getDate() + i;
