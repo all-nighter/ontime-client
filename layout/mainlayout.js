@@ -98,9 +98,9 @@ function MainLayout(props) {
   return (
     <div className={classes.root}>
       {/* <Grid className={classes.appbar}></Grid> */}
-      {!!headerTitle && (
+      {/* {!!headerTitle && (
         <AppBar className={classes.header}>{headerTitle}</AppBar>
-      )}
+      )} */}
       <Grid className={classes.mainGrid}>
         <Grid className={classes.middleGrid} xs={12}>
           {children}
