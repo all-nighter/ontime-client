@@ -12,22 +12,19 @@ import {convertCoordToAddress, convertAddressToCoord} from '../../lib/Map/map.li
 
 const MapContainer = (props) => {
   
-  const {map, ...rest} = props
-
-    const mapStyles = {        
-      height: "55vh",
-      width: "100%",
-      position: 'absolute',
-      top: '45vh',
-      left: 0
-    };
+  const {map, mapStyles, ...rest} = props
     
     const [pinPosition, setPinPosition] = useState({
       startCoordinates:  map.startCoordinates,
       destCoordinates: map.destCoordinates,
       startAddress: map.startAddress,
       destAddress: map.destAddress,
+      mapType: map.mapType,
     })
+
+    MapContext.renderAgain = () => {
+      setPinPosition({...pinPosition, ...MapContext.getMapContext()})
+    }
 
     // useEffect( () => {
     //   setPinPosition({...pinPosition, ...MapContext.getMapContext()})
@@ -48,6 +45,24 @@ const MapContainer = (props) => {
       MapContext.renderPin()
   };
 
+  const calcRoute = (directionsService, directionsRenderer) => {
+    let request = {
+      origin: pinPosition.startCoordinates,
+      destination: pinPosition.destCoordinates,
+      travelMode: "DRIVING"
+    };
+
+    directionsService.route(request, function(result, status) {
+      if (status == "OK") {
+        const estimatedTimeSeconds = result.routes[0].legs[0].duration.value
+        MapContext.setContext('estimatedTimeSeconds', estimatedTimeSeconds)
+        MapContext.renderEstimatedTime()
+        directionsRenderer.setDirections(result);
+
+      }
+    });
+}
+
 
 
   return (
@@ -62,6 +77,13 @@ const MapContainer = (props) => {
             map.fitBounds(bounds)
             var opt = {maxZoom: 16 };
             map.setOptions(opt);
+
+            if (pinPosition.mapType === 1) {
+              let directionsService = new google.maps.DirectionsService();
+              let directionsRenderer = new google.maps.DirectionsRenderer();
+              directionsRenderer.setMap(map);
+              calcRoute(directionsService, directionsRenderer);
+            }
 
           }}
           key={new Date()}

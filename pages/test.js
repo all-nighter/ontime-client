@@ -1,11 +1,13 @@
 import MapContainer from '../components/Map/MapContainer'
+import MapDirections from '../components/Map/MapDirections'
+
 
 
 const Test = () => {
 
     return (
         <div>
-            <MapContainer/>
+            <MapDirections/>
         </div>
     )
 }
