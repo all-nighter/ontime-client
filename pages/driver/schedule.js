@@ -476,6 +476,28 @@ function ListMode() {
   );
 }
 
+
+function toMinute (time) {
+  parseInt(time / 60)
+}
+function handleCheckRoute(props) {
+
+  console.log(props.data)
+    const startLat = props.data.departureLocationPoint.lat
+    const startLng = props.data.departureLocationPoint.lng
+
+    const destLat =  props.data.destinationLocationPoint.lat
+    const destLng =  props.data.destinationLocationPoint.lng
+
+    const eta = toMinute(props.data.estimatedTimeSeconds)
+
+
+  location.href = 
+    `/driver/route?userName=${props.data.user.name}&phone=${props.data.user.phoneNumber}&startLat=${startLat}&startLng=${startLng}&destLat=${destLat}&destLng=${destLng}&eta=${eta}`
+
+
+}
+
 function ListContent(props) {
   const classes = useStyles();
   console.log('ListContent =>', props.data);
@@ -514,8 +536,8 @@ function ListContent(props) {
         </Grid>
       </Grid>
       <Grid className={classes.buttonContainer}>
-        <Button className={classes.got}>Got</Button>
-        <Button className={classes.ignore}>ignore</Button>
+        <Button className={classes.got} onClick={() =>  handleCheckRoute(props)}> Accept </Button>
+        <Button className={classes.ignore}>Ignore</Button>
       </Grid>
     </Grid>
   );

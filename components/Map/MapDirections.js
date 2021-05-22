@@ -2,13 +2,12 @@ import React, {useState} from 'react'
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 
-const MapDirections = () => {
+const MapDirections = (props) => {
 
-    const [directionInfo, setDirectionInfo] = useState({
-        destination: {},
-        origin: {},
-    })
+    const {start, dest} = props
 
+
+    console.log('ldavkmadmvl', start,dest)
     const mapStyles = {        
         height: "100vh",
         width: "100%",
@@ -17,19 +16,11 @@ const MapDirections = () => {
         left: 0
       };
 
-    let point = {
-        lat: 35,
-        lng: -100
-      };
     
-      let dest = {
-        lat: 34.99,
-        lng: -100.1
-      };
 
     const calcRoute = (directionsService, directionsRenderer) => {
         let request = {
-          origin: point,
+          origin: start,
           destination: dest,
           travelMode: "DRIVING"
         };
