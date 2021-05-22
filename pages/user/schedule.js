@@ -340,7 +340,7 @@ function Content() {
       setData(res.subscribed);
     };
     fetchData();
-  });
+  }, []);
   for (let i = 0; i < 7; i++) {
     const day = (now.getDay() + i) % 7;
     const date = now.getDate() + i;

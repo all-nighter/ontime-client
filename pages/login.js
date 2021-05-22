@@ -83,6 +83,10 @@ const useStyles = makeStyles((theme) => ({
     height: '7vh',
     backgroundColor: mint,
     color: '#fff',
+    '&:hover': {
+      backgroundColor: mint,
+      color: '#fff',
+    },
   },
   signup: {
     width: '90vw',
@@ -322,13 +326,6 @@ function UserSignup(props) {
   const [phoneNumber, setPhoneNumber] = useState();
   const [password, setPassword] = useState();
 
-  useEffect(() => {
-    console.log(name);
-    console.log(email);
-    console.log(phoneNumber);
-    console.log(password);
-  }, [name, email, phoneNumber, password]);
-
   return (
     <Grid className={`${classes.middleGrid} ${classes.marginTop}`}>
       <Grid className={classes.signinContainer}>
@@ -444,13 +441,6 @@ function DriverSignup(props) {
   const [email, setEmail] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
   const [password, setPassword] = useState();
-
-  useEffect(() => {
-    console.log(name);
-    console.log(email);
-    console.log(phoneNumber);
-    console.log(password);
-  }, [name, email, phoneNumber, password]);
 
   return (
     <Grid className={`${classes.middleGrid} ${classes.marginTop}`}>

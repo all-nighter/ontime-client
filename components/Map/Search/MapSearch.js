@@ -23,6 +23,15 @@ const MainSearch = (props) => {
   return (
     <Paper className={Styles.searchContainer}>
       <div className={Styles.searchTitleContainer}>
+        <Button
+          style={{ color: '#00B5CE', position: 'fixed', left: 0 }}
+          onClick={() => {
+            location.href = '/user/schedule';
+          }}
+        >
+          <img src={'/navigate_before.png'} />
+          SCHEDULE
+        </Button>
         <h1 className={Styles.searchTitle}> SEARCH </h1>
       </div>
       <SearchArea map={map} />
