@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     margin: '4vw',
     borderRadius: '5px',
+    marginTop: '10vh',
   },
   img: {
     width: '15vw',
@@ -67,6 +68,11 @@ const useStyles = makeStyles((theme) => ({
     position: 'fixed',
     top: '15vh',
     justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  mint: {
+    color: mint,
   },
 }));
 
@@ -75,6 +81,16 @@ function Title(props) {
   return (
     <Grid className={classes._width100}>
       <img src={'/select.png'} className={classes.selectTitle} />
+    </Grid>
+  );
+}
+
+function Logo(props) {
+  const classes = useStyles();
+  return (
+    <Grid className={classes._width100}>
+      <img src={'/logo2.png'} className={classes.selectTitle} />
+      <Typography className={classes.mint}>{props.type}</Typography>
     </Grid>
   );
 }
@@ -111,11 +127,10 @@ function SelectUserDriver(props) {
 
 function UserField() {
   const [isSignup, setIsSignup] = useState(false);
+  const classes = useStyles();
   return (
     <Grid>
-      <Grid>
-        <Typography>User</Typography>
-      </Grid>
+      <Logo type={'User'} />
       {!!isSignup && <UserSignup setIsSignup={setIsSignup} />}
       {!!!isSignup && <UserLogin setIsSignup={setIsSignup} />}
     </Grid>
@@ -124,11 +139,10 @@ function UserField() {
 
 function DriverField() {
   const [isSignup, setIsSignup] = useState(false);
+  const classes = useStyles();
   return (
     <Grid>
-      <Grid>
-        <Typography>Driver</Typography>
-      </Grid>
+      <Logo type={'Driver'} />
       {!!isSignup && <DriverSignup setIsSignup={setIsSignup} />}
       {!!!isSignup && <DriverLogin setIsSignup={setIsSignup} />}
     </Grid>
@@ -140,7 +154,7 @@ function UserLogin(props) {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   return (
-    <Grid className={classes.middleGrid} container spacing={3}>
+    <Grid className={classes.middleGrid}>
       <Grid className={classes.signinContainer}>
         <Grid className={classes.inputContainer}>
           <Input placeholder={'id'} />
@@ -192,8 +206,18 @@ function DriverLogin(props) {
     <Grid className={classes.middleGrid} container spacing={3}>
       <Grid className={classes.signinContainer}>
         <Grid className={classes.inputContainer}>
-          <Input placeholder={'id'} />
-          <Input placeholder={'password'} />
+          <Input
+            placeholder={'email'}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          <Input
+            placeholder={'password'}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
         </Grid>
         {/* <Link href="/main"> */}
         <Button
@@ -206,9 +230,8 @@ function DriverLogin(props) {
               body: JSON.stringify({ email, password }),
             }).then((res) => {
               if (res.status === 200) {
-                alert(email);
                 localStorage.setItem('email', email);
-                location.href = '/main';
+                location.href = '/driver/schedule';
               } else {
                 alert('login failed');
               }
@@ -387,7 +410,7 @@ function DriverSignup(props) {
               .then((res) => {
                 if (res.status === 200) {
                   localStorage.setItem('email', email);
-                  location.href = '/main';
+                  location.href = '/driver/schedule';
                 } else if (res.status === 409) {
                   alert('this email already exists!');
                 } else {

@@ -128,7 +128,7 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     color: 'grey',
   },
-  book: { border: 'solid 1vw #8080804f' },
+  book: { border: 'solid 1px #8080804f' },
   title: {
     fontSize: '4vw',
     fontWeight: 'bold',
@@ -143,6 +143,9 @@ const useStyles = makeStyles((theme) => ({
   },
   _bold: {
     fontWeight: 'bold',
+  },
+  scheduleContainer: {
+    marginBottom: '3vh',
   },
 }));
 
@@ -254,11 +257,11 @@ function PlanTemplate() {
   );
 }
 
-function Scedule(props) {
+function Schedule(props) {
   const classes = useStyles();
   let schedule = checkSchedule(props.day?.day, props.data);
   return (
-    <React.Fragment>
+    <Grid className={classes.scheduleContainer}>
       <Grid>
         <Grid className={classes.dateContainer}>
           <Typography className={`${classes._padding} ${classes.month}`}>
@@ -284,7 +287,7 @@ function Scedule(props) {
           <NoPlanTemplate />
         </Grid>
       )}
-    </React.Fragment>
+    </Grid>
   );
 }
 
@@ -313,7 +316,7 @@ function Content() {
   return (
     <Grid className={classes.contentContainer}>
       {days.map((x) => (
-        <Scedule day={x} data={data} />
+        <Schedule day={x} data={data} />
       ))}
     </Grid>
   );
