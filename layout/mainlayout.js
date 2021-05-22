@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     justify: 'space-around',
   },
   middleGrid: {
-    height: '80vh',
+    height: '100vh',
     spacing: 0,
     direction: 'column',
     textAlign: 'center',
@@ -89,13 +89,13 @@ function MainLayout(props) {
   const { children, hideFooter } = props;
   return (
     <div className={classes.root}>
-      <Grid className={classes.appbar}></Grid>
+      {/* <Grid className={classes.appbar}></Grid> */}
       <Grid className={classes.mainGrid}>
         <Grid className={classes.middleGrid} xs={12}>
           {children}
         </Grid>
       </Grid>
-      {!hideFooter && (
+      {/* {!hideFooter && (
         <Grid className={classes.footer}>
           <Grid>
             <Button>main</Button>
@@ -107,7 +107,7 @@ function MainLayout(props) {
             <Button>profile</Button>
           </Grid>
         </Grid>
-      )}
+      )} */}
     </div>
   );
 }
