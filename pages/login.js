@@ -141,7 +141,7 @@ function SelectUserDriver(props) {
           props.setIsDriver(false);
         }}
       >
-        <img src={'/accessible.png'} className={classes.img} />
+        <img src={'/person_pin_circle.png'} className={classes.img} />
         <Button className={classes.bold}>User</Button>
       </Grid>
       <Grid
