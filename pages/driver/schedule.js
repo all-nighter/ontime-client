@@ -8,6 +8,10 @@ import Link from 'next/link';
 import MainLayout from '../../layout/mainlayout';
 import { Typography } from '@material-ui/core';
 import { API_PREFIX } from '../../env';
+import IconButton from '@material-ui/core/IconButton';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const mint = '#00B5CE';
 
@@ -29,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     // flexGrow: 1,
     boxShadow: '0 0 10px 10px #00000014',
     borderRadius: '0 0 15px 15px',
-    height: '7vh',
+    height: '15vh',
   },
   headerTitle: {
     flexGrow: 2,
@@ -46,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
   contentContainer: {
     // flexGrow: 5,
-    height: '93vh',
+    height: '85vh',
     width: '100vw',
     padding: '5vw',
     overflow: 'scroll',
@@ -211,20 +215,69 @@ const useStyles = makeStyles((theme) => ({
     width: '90vw',
     justifyContent: 'center',
   },
+  hbg: {
+    position: 'fixed',
+    right: 0,
+    color: mint,
+  },
 }));
 
 function Header(props) {
   const classes = useStyles();
+  const [email, setEmail] = useState('');
+  useEffect(() => {
+    setEmail(localStorage.getItem('email'));
+  }, []);
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const logout = () => {
+    location.href = '/login';
+  };
+
   return (
     <Grid className={classes.headerContainer}>
-      {/* <Grid className={classes.headerTitle}>
-        <Link href="/main">
-          <Button className={classes.toMap}>
-            <img src={'/navigate_before.png'} />
-            map
-          </Button>
-        </Link>
-      </Grid> */}
+      <Grid className={classes.headerTitle}>
+        <Typography style={{ fontWeight: '500' }}>{email}</Typography>
+        <Grid className={classes.hbg}>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenu}
+            color={'aqua'}
+          >
+            <AccountCircle />
+          </IconButton>
+
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={open}
+            onClose={handleClose}
+          >
+            {/* <MenuItem>
+              {' '}
+              {cookies.id} {t('님')}
+            </MenuItem> */}
+            <MenuItem onClick={() => logout()}>LOG OUT</MenuItem>
+          </Menu>
+        </Grid>
+      </Grid>
       <Grid className={classes.upcomingEventContainer}>
         <Grid className={classes.navbar}>
           <Button

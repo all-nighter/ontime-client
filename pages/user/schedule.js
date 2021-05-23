@@ -8,6 +8,10 @@ import Link from 'next/link';
 import MainLayout from '../../layout/mainlayout';
 import { Typography } from '@material-ui/core';
 import { API_PREFIX } from '../../env';
+import IconButton from '@material-ui/core/IconButton';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const mint = '#00B5CE';
 
@@ -158,10 +162,26 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     width: '80vw',
   },
+  hbg: {
+    position: 'fixed',
+    right: 0,
+    color: mint,
+  },
 }));
 
 function Header() {
   const classes = useStyles();
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const logout = () => {
+    location.href = '/login';
+  };
   return (
     <Grid className={classes.headerContainer}>
       <Grid className={classes.headerTitle}>
@@ -172,6 +192,40 @@ function Header() {
             map
           </Button>
         </Link>
+
+        <Grid className={classes.hbg}>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenu}
+            color={'aqua'}
+          >
+            <AccountCircle />
+          </IconButton>
+
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={open}
+            onClose={handleClose}
+          >
+            {/* <MenuItem>
+              {' '}
+              {cookies.id} {t('님')}
+            </MenuItem> */}
+            <MenuItem onClick={() => logout()}>LOG OUT</MenuItem>
+          </Menu>
+        </Grid>
       </Grid>
       <Grid className={classes.upcomingEventContainer}>
         <Grid className={classes.flex}>
