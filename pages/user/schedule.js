@@ -86,7 +86,9 @@ const useStyles = makeStyles((theme) => ({
   },
   templateProfileContainer: {
     display: 'flex',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    padding: 5,
+    paddingLeft: 15,
   },
   img: {
     width: '15vw',
@@ -253,6 +255,7 @@ function PlanTemplate(props) {
           </Grid>
         </Grid>
         <Grid className={`${classes._column} ${classes.arriveTime}`}>
+          {parseInt(props.data?.hour) > 12 ? 'PM ' : 'AM '}
           {props.data?.hour}:{props.data?.minute}
         </Grid>
       </Grid>

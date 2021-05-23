@@ -99,6 +99,14 @@ const useStyles = makeStyles((theme) => ({
   marginTop: {
     marginTop: '10vh',
   },
+  backButton: {
+    position: 'fixed',
+    marginTop: '10vh',
+    left: '3vw',
+    top: 0,
+    zIndex: 99,
+    // width: '10vw',
+  },
 }));
 
 function Title(props) {
@@ -150,11 +158,34 @@ function SelectUserDriver(props) {
   );
 }
 
-function UserField() {
+function BackButton(props) {
+  const classes = useStyles();
+  console.log('backbutton =>', props);
+  return (
+    <Grid
+      className={classes.backButton}
+      onClick={() => {
+        console.log('click');
+        if (props.setIsUser) {
+          props.setIsUser(false);
+        }
+        if (props.setIsDriver) {
+          props.setIsDriver(false);
+        }
+      }}
+    >
+      <img src={'/navigate_before.png'} width="40px" />
+      <Typography style={{ fontSize: 13, color: mint }}>BACK</Typography>
+    </Grid>
+  );
+}
+
+function UserField(props) {
   const [isSignup, setIsSignup] = useState(false);
   const classes = useStyles();
   return (
     <Grid>
+      <BackButton setIsUser={props.setIsUser} setIsDriver={props.setIsDriver} />
       <Logo type={'User'} />
       {!!isSignup && <UserSignup setIsSignup={setIsSignup} />}
       {!!!isSignup && <UserLogin setIsSignup={setIsSignup} />}
@@ -162,11 +193,12 @@ function UserField() {
   );
 }
 
-function DriverField() {
+function DriverField(props) {
   const [isSignup, setIsSignup] = useState(false);
   const classes = useStyles();
   return (
     <Grid>
+      <BackButton setIsUser={props.setIsUser} setIsDriver={props.setIsDriver} />
       <Logo type={'Driver'} />
       {!!isSignup && <DriverSignup setIsSignup={setIsSignup} />}
       {!!!isSignup && <DriverLogin setIsSignup={setIsSignup} />}
@@ -559,8 +591,10 @@ function App() {
       {!isUser && !isDriver && (
         <SelectUserDriver setIsUser={setIsUser} setIsDriver={setIsDriver} />
       )}
-      {isUser && <UserField />}
-      {isDriver && <DriverField />}
+      {isUser && <UserField setIsUser={setIsUser} setIsDriver={setIsDriver} />}
+      {isDriver && (
+        <DriverField setIsUser={setIsUser} setIsDriver={setIsDriver} />
+      )}
     </MainLayout>
   );
 }
