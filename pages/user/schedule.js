@@ -233,14 +233,11 @@ function Header() {
             src={'/notification.png'}
             className={`${classes.icon} ${classes.padding}`}
           />
-          <Button
-            className={classes._bold}
-            onClick={() => {
-              <Link href={'/cabArriving'} />;
-            }}
-          >
-            cab is arriving in 30 minutes!
-          </Button>
+          <Link href={'/cabArriving'}>
+            <Button className={classes._bold}>
+              cab is arriving in 30 minutes!
+            </Button>
+          </Link>
         </Grid>
       </Grid>
     </Grid>
