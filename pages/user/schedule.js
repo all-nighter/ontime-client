@@ -233,14 +233,11 @@ function Header() {
             src={'/notification.png'}
             className={`${classes.icon} ${classes.padding}`}
           />
-          <Button
-            className={classes._bold}
-            onClick={() => {
-              <Link href={'/cabArriving'} />;
-            }}
-          >
-            cab is arriving in 30 minutes!
-          </Button>
+          <Link href={'/cabArriving'}>
+            <Button className={classes._bold}>
+              cab is arriving in 30 minutes!
+            </Button>
+          </Link>
         </Grid>
       </Grid>
     </Grid>
@@ -267,13 +264,13 @@ const data = [
 
 const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 const daysMap = {
-  0: 'Sun',
-  1: 'Mon',
-  2: 'Tue',
-  3: 'Wed',
-  4: 'Thu',
-  5: 'Fri',
-  6: 'Sat',
+  6: 'Sun',
+  0: 'Mon',
+  1: 'Tue',
+  2: 'Wed',
+  3: 'Thu',
+  4: 'Fri',
+  5: 'Sat',
 };
 const monthMap = {
   4: 'May',
