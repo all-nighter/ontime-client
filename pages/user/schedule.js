@@ -29,13 +29,14 @@ const useStyles = makeStyles((theme) => ({
     // flexGrow: 1,
     boxShadow: '0 0 10px 10px #00000014',
     borderRadius: '0 0 15px 15px',
-    height: '15vh',
+    height: '18vh',
   },
   headerTitle: {
     flexGrow: 1,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    height: '15%',
   },
   upcomingEventContainer: {
     flexGrow: 2,
@@ -134,8 +135,8 @@ const useStyles = makeStyles((theme) => ({
   },
   book: { border: 'solid 1px #8080804f' },
   title: {
-    fontSize: '4vw',
-    fontWeight: 'bold',
+    fontSize: '20px',
+    fontWeight: '500',
   },
   arriveTime: {
     color: mint,
