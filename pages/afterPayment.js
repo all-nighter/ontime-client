@@ -63,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: mint,
     color: '#fff',
     fontWeight: 'bold',
+    marginTop: 60,
   },
   textContainer: {
     width: '80vw',
@@ -138,11 +139,11 @@ function App() {
           </Grid>
         </Grid>
         <Grid className={classes.floatingBottom}>
-          <Grid className={classes.textContainer}>
+          {/* <Grid className={classes.textContainer}>
             <Typography>
               You can see your purchase history in SERVICE or MYLOUNGE
             </Typography>
-          </Grid>
+          </Grid> */}
           <Grid>
             <Link href="/main">
               <Button className={classes.done}>Done</Button>
