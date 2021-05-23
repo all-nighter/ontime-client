@@ -59,6 +59,9 @@ const MainSearch = (props) => {
                         className={Styles.textArea}
                         value={search.startAddress}
                         onChange={(e) => handleSearch('startAddress', e)}
+                        onFocus={(e) => {
+                            setSearch({...search, startAddress: ''})
+                        }}
                         onKeyPress={async (e) => {
                             if(e.key === 'Enter' && search.startAddress.length > 0){
                                 e.preventDefault(); // Ensure it is only this code that runs
@@ -75,6 +78,9 @@ const MainSearch = (props) => {
                         className={Styles.textArea}
                         value={search.destAddress}
                         onChange={(e) => handleSearch('destAddress', e)}
+                        onFocus={(e) => {
+                            setSearch({...search, destAddress: ''})
+                        }}
                         onKeyPress={async (e) => {
                             if(e.key === 'Enter' && search.destAddress.length > 0){
                             await submitSearch('destAddress', 'destCoordinates', e)
