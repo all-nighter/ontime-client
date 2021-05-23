@@ -129,7 +129,7 @@ function App() {
           <Grid className={classes._column2}>
             <PaymentInfo
               text1={'Subscription Information'}
-              text2={'Service A'}
+              text2={'ONTIME PREMIUM'}
             />
             <PaymentInfo text1={'Payment Amount'} text2={'$100.00'} />
             <PaymentInfo text1={'Date'} text2={'May 22, 2021 10:56::06 PM'} />

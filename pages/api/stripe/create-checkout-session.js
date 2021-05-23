@@ -26,8 +26,8 @@ handler.post(async (req, res) => {
       // is redirected to the success page.
       // success_url: 'https://example.com/success.html?session_id={CHECKOUT_SESSION_ID}',,
       // cancel_url: 'https://example.com/canceled.html',
-      success_url: 'http://localhost:3000/afterPayment',
-      cancel_url: 'http://localhost:3000/my-page/pricing',
+      success_url: 'http://app.allnighter.timespread.co.kr/afterPayment',
+      cancel_url: 'http://app.allnighter.timespread.co.kr/my-page/pricing',
     });
 
     res.send({

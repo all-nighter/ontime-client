@@ -233,20 +233,27 @@ function NoPlanTemplate() {
   );
 }
 
-function PlanTemplate() {
+function PlanTemplate(props) {
   const classes = useStyles();
   return (
     <Grid className={classes.planTemplate}>
       <Grid className={classes.templateProfileContainer}>
         <Grid className={classes._spaceAround}>
-          <img src={'/driver.png'} className={classes.img} />
+          <img
+            src={`/avatars/img_profile_${
+              Math.floor(Math.random() * 11) + 1
+            }.png`}
+            className={classes.img}
+          />
           <Grid className={classes._column}>
-            <Typography>Soojin Hwang</Typography>
-            <Typography className={classes.desc}>with children</Typography>
+            <Typography>{props.data?.driver.name}</Typography>
+            <Typography className={classes.desc}>
+              {props.data?.driver.phoneNumber}
+            </Typography>
           </Grid>
         </Grid>
         <Grid className={`${classes._column} ${classes.arriveTime}`}>
-          AM 08:45
+          {props.data?.hour}:{props.data?.minute}
         </Grid>
       </Grid>
       <Grid>
@@ -255,7 +262,7 @@ function PlanTemplate() {
           <Typography
             className={`${classes._textAlignLeft} ${classes._smallText}`}
           >
-            Pick Up: Seoul
+            Pick Up: {props.data?.departure}
           </Typography>
         </Grid>
         <Grid className={classes._row}>
@@ -263,7 +270,7 @@ function PlanTemplate() {
           <Typography
             className={`${classes._textAlignLeft} ${classes._smallText}`}
           >
-            Drop Off: Amazon
+            Drop Off: {props.data?.destination}
           </Typography>
         </Grid>
       </Grid>
@@ -273,7 +280,7 @@ function PlanTemplate() {
 
 function Schedule(props) {
   const classes = useStyles();
-  let schedule = checkSchedule(props.day?.day, props.data);
+  let schedules = checkSchedule(props.day?.day, props.data);
   return (
     <Grid className={classes.scheduleContainer}>
       <Grid>
@@ -290,14 +297,15 @@ function Schedule(props) {
           </Typography>
         </Grid>
       </Grid>
-      {!!schedule && (
-        <Grid className={classes.templateContainer}>
-          <PlanTemplate />
+      {schedules.map((x) => (
+        <Grid
+          className={`${classes.templateContainer} ${classes.scheduleContainer}`}
+        >
+          <PlanTemplate data={x} />
         </Grid>
-      )}
-      {!!!schedule && (
+      ))}
+      {schedules.length === 0 && (
         <Grid className={classes.templateContainer}>
-          {/* <Typography>{props.day?.day}</Typography> */}
           <NoPlanTemplate />
         </Grid>
       )}
@@ -307,14 +315,15 @@ function Schedule(props) {
 
 function checkSchedule(day, subscriptions) {
   console.log('checkSchedule', day);
+  const results = [];
   for (let i = 0; i < subscriptions.length; i++) {
     let data = subscriptions[i];
     console.log('data:', data);
-    if (data.time?.day === day) {
-      return data;
+    if (data.frequencyOfWeek?.includes(day)) {
+      results.push(data);
     }
   }
-  return false;
+  return results;
 }
 
 function Content() {

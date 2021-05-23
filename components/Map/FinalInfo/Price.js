@@ -18,10 +18,9 @@ const Price = () => {
     ...MapContext.getMapContext(),
   });
 
-
   MapContext.renderSubmit = () => {
-      console.log('being rendered')
-        setSubmission({ ...submission, ...MapContext.getMapContext() });
+    console.log('being rendered');
+    setSubmission({ ...submission, ...MapContext.getMapContext() });
   };
 
   const stripe = useStripe();
@@ -43,8 +42,6 @@ const Price = () => {
   };
 
   const handleSubmit = async () => {
-
-
     const params = {
       ...submission,
       estimatedTimeSeconds: MapContext.getMapContext().estimatedTimeSeconds,
@@ -76,7 +73,7 @@ const Price = () => {
           <img src="./directions_car.png" />
         </Grid>
         <Grid item xs={8} className={Styles.serviceContainer}>
-          <p className={Styles.serviceText1}> Service A</p>
+          <p className={Styles.serviceText1}> ONTIME</p>
           <p className={Styles.serviceText2}> 2U </p>
         </Grid>
         <Grid item xs={2} className={Styles.priceContainer}>
@@ -90,7 +87,7 @@ const Price = () => {
           <img src="./local_car_wash.png" />
         </Grid>
         <Grid item xs={8} className={Styles.serviceContainer}>
-          <p className={Styles.serviceText1}> Service B</p>
+          <p className={Styles.serviceText1}> ONTIME PREMIUM</p>
           <p className={Styles.serviceText2}> 2U </p>
         </Grid>
         <Grid item xs={2} className={Styles.priceContainer}>
