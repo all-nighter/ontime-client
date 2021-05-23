@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     // flexGrow: 1,
     boxShadow: '0 0 10px 10px #00000014',
     borderRadius: '0 0 15px 15px',
-    height: '15vh',
+    height: '7vh',
   },
   headerTitle: {
     flexGrow: 2,
@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
   contentContainer: {
     // flexGrow: 5,
-    height: '85vh',
+    height: '93vh',
     width: '100vw',
     padding: '5vw',
     overflow: 'scroll',
@@ -217,15 +217,14 @@ function Header(props) {
   const classes = useStyles();
   return (
     <Grid className={classes.headerContainer}>
-      <Grid className={classes.headerTitle}>
-        {/* <Typography className={classes.title}>SCHEDULE</Typography> */}
+      {/* <Grid className={classes.headerTitle}>
         <Link href="/main">
           <Button className={classes.toMap}>
             <img src={'/navigate_before.png'} />
             map
           </Button>
         </Link>
-      </Grid>
+      </Grid> */}
       <Grid className={classes.upcomingEventContainer}>
         <Grid className={classes.navbar}>
           <Button
