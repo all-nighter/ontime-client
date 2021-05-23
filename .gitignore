@@ -19,3 +19,7 @@ next.config.js
 /.next
 
 env.js
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
