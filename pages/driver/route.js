@@ -68,10 +68,10 @@ const Route = () => {
                     // height: '80',
                     // margin: 'auto',
                   }}
-                  //   src={`/avatars/img_profile_${
-                  //     Math.floor(Math.random() * 11) + 1
-                  //   }.png`}
-                  src={`/user.png`}
+                  src={`/avatars/img_profile_${
+                    Math.floor(Math.random() * 13) + 1
+                  }.png`}
+                  //   src={`/user.png`}
                 />
               </Grid>
               <Grid item xs={5}>

@@ -299,10 +299,10 @@ function PlanTemplate(props) {
       <Grid className={classes.templateProfileContainer}>
         <Grid className={classes._spaceAround}>
           <img
-            // src={`/avatars/img_profile_${
-            //   Math.floor(Math.random() * 11) + 1
-            // }.png`}
-            src={'/driver.png'}
+            src={`/avatars/img_profile_${
+              Math.floor(Math.random() * 13) + 1
+            }.png`}
+            // src={'/driver.png'}
             className={classes.img}
           />
           <Grid className={classes._column}>

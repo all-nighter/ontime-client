@@ -219,7 +219,7 @@ function PlanTemplate() {
         <Grid className={classes._spaceAround}>
           <img
             src={`/avatars/img_profile_${
-              Math.floor(Math.random() * 11) + 1
+              Math.floor(Math.random() * 13) + 1
             }.png`}
             className={classes.img}
           />

@@ -357,10 +357,10 @@ function PlanTemplate(props) {
       <Grid className={classes.templateProfileContainer}>
         <Grid className={classes._spaceAround}>
           <img
-            // src={`/avatars/img_profile_${
-            //   Math.floor(Math.random() * 11) + 1
-            // }.png`}
-            src={'/user.png'}
+            src={`/avatars/img_profile_${
+              Math.floor(Math.random() * 13) + 1
+            }.png`}
+            // src={'/user.png'}
             className={classes.img}
           />
           <Grid className={classes._column}>
@@ -573,10 +573,10 @@ function ListContent(props) {
       <Grid className={classes.templateProfileContainer}>
         <Grid className={classes._spaceAround}>
           <img
-            // src={`/avatars/img_profile_${
-            //   Math.floor(Math.random() * 11) + 1
-            // }.png`}
-            src={'/user.png'}
+            src={`/avatars/img_profile_${
+              Math.floor(Math.random() * 13) + 1
+            }.png`}
+            // src={'/user.png'}
             className={classes.img}
           />
           <Grid className={classes._column}>
