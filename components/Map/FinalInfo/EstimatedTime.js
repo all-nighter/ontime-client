@@ -45,8 +45,7 @@ const EstimatedTime = () => {
         <Grid className={Styles.dummy}></Grid>
         <div className={Styles.minContainer}>
           <h2 className={Styles.minText}>
-            {' '}
-            {convertSecToMin(estimatedTime.estimatedTimeSeconds)}{' '}
+            {convertSecToMin(estimatedTime.estimatedTimeSeconds)}
           </h2>
           <h5 className={Styles.tinyText}> min </h5>
         </div>
