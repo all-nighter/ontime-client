@@ -35,28 +35,16 @@ function App() {
 
   const [loading, setLoading] = useState(true);
 
-  async function success(pos) {
-    var crd = pos.coords;
-
-    console.log('Your current position is:');
-    console.log(`Latitude : ${crd.latitude}`);
-    console.log(`Longitude: ${crd.longitude}`);
-    console.log(`More or less ${crd.accuracy} meters.`);
-
-    let map = await MapContext.initialize({
-      lat: crd.latitude,
-      lng: crd.longitude,
-    });
-    setMapContext(map);
-    setLoading(false);
-  }
-
-  function error(err) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
-  }
-
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(success, error);
+    async function intialize () {
+      let map = await MapContext.initialize({
+        lat: 40.78306,
+        lng: -73.971249
+      });
+      setMapContext(map);
+      setLoading(false);
+    }
+    intialize()
   }, []);
 
   const mapStyle1 = {

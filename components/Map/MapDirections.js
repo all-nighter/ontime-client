@@ -7,7 +7,6 @@ const MapDirections = (props) => {
     const {start, dest} = props
 
 
-    console.log('ldavkmadmvl', start,dest)
     const mapStyles = {        
         height: "100vh",
         width: "100%",

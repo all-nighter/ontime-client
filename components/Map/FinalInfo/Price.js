@@ -50,6 +50,7 @@ const Price = () => {
       estimatedTimeSeconds: MapContext.getMapContext().estimatedTimeSeconds,
       email: localStorage.getItem('email'),
     };
+     console.log(params)
 
     let response = await fetch(`${API_PREFIX}/user/subscription`, {
       method: 'POST',
