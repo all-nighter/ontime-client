@@ -157,7 +157,7 @@ function Header() {
         </Link>
       </Grid>
       <Grid className={classes.upcomingEventContainer}>
-        <Typography>cab is ariving in 30 minutes!</Typography>
+        <Button>cab is arriving in 30 minutes!</Button>
       </Grid>
     </Grid>
   );

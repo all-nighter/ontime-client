@@ -233,9 +233,14 @@ function Header() {
             src={'/notification.png'}
             className={`${classes.icon} ${classes.padding}`}
           />
-          <Typography className={classes._bold}>
-            cab is ariving in 30 minutes!
-          </Typography>
+          <Button
+            className={classes._bold}
+            onClick={() => {
+              <Link href={'/cabArriving'} />;
+            }}
+          >
+            cab is arriving in 30 minutes!
+          </Button>
         </Grid>
       </Grid>
     </Grid>
@@ -297,9 +302,10 @@ function PlanTemplate(props) {
       <Grid className={classes.templateProfileContainer}>
         <Grid className={classes._spaceAround}>
           <img
-            src={`/avatars/img_profile_${
-              Math.floor(Math.random() * 11) + 1
-            }.png`}
+            // src={`/avatars/img_profile_${
+            //   Math.floor(Math.random() * 11) + 1
+            // }.png`}
+            src={'/driver.png'}
             className={classes.img}
           />
           <Grid className={classes._column}>
