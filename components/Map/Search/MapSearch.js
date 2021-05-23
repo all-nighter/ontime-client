@@ -12,6 +12,11 @@ const MainSearch = (props) => {
   const { map, ...rest } = props;
 
   const handleSubmit = async () => {
+    const context = MapContext.getMapContext()
+    if (!context.startAddress || !context.destAddress || !context.startCoordinates || !context.destCoordinates) {
+      alert('Please choose both the starting and destination locations')
+      return
+    }
     MapContext.setContext('mapType', 1);
     MapContext.renderMapType();
     MapContext.renderAgain();

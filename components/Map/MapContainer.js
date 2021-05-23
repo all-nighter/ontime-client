@@ -59,6 +59,9 @@ const MapContainer = (props) => {
         MapContext.renderEstimatedTime()
         directionsRenderer.setDirections(result);
 
+      } else {
+        alert('Google Map unfortunately does not support these locations (All locations in South Korea are not supported). Please try again.')
+        location.href = '/main'
       }
     });
 }
