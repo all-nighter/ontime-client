@@ -7,14 +7,29 @@ import SearchArea from './SearchArea';
 import TimeSelect from './TimeSelect';
 
 import MapContext from '../MapContext';
+import Alert from '@material-ui/lab/Alert';
+import { TramRounded } from '@material-ui/icons';
+
 
 const MainSearch = (props) => {
   const { map, ...rest } = props;
 
+  const [isMapError, setIsMapError] = useState(false)
+  const [isDayError, setIsDayError] = useState(false)
+
+
   const handleSubmit = async () => {
     const context = MapContext.getMapContext()
     if (!context.startAddress || !context.destAddress || !context.startCoordinates || !context.destCoordinates) {
-      alert('Please choose both the starting and destination locations')
+      setIsMapError(true)
+      setTimeout(() => setIsMapError(false), 3000)
+
+      return
+    }
+
+    if (context.numDays === 0) {
+      setIsDayError(true)
+      setTimeout(() => setIsDayError(false), 3000)
       return
     }
     MapContext.setContext('mapType', 1);
@@ -27,6 +42,13 @@ const MainSearch = (props) => {
 
   return (
     <Paper className={Styles.searchContainer}>
+      { isMapError && 
+      <Alert style={{position: 'absolute', bottom: '-48px', zIndex: 99999999, width: '100%'}} severity="error">Please choose start and destination locations</Alert>
+      }
+      {isDayError &&
+      <Alert  style={{position: 'absolute', bottom: '-48px', zIndex: 99999999, width: '100%'}} severity="error">Please select days</Alert>
+      }
+
       <div className={Styles.searchTitleContainer}>
         <Button
           style={{ color: '#00B5CE', position: 'fixed', left: 0 }}

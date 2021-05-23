@@ -98,6 +98,7 @@ const MapContainer = (props) => {
             }
           }
         >
+          {pinPosition.mapType === 0 &&
           <div> 
             {pinPosition.startCoordinates.lat ? (
               <Marker
@@ -105,6 +106,7 @@ const MapContainer = (props) => {
                   lat: pinPosition.startCoordinates.lat,
                   lng: pinPosition.startCoordinates.lng,
                 }}
+                icon={'/marker.png'}
                 onDragEnd={async (e) => await onMarkerDragEnd('startAddress', 'startCoordinates', e)}
                 draggable={true}
               />
@@ -115,11 +117,13 @@ const MapContainer = (props) => {
                   lat: pinPosition.destCoordinates.lat,
                   lng: pinPosition.destCoordinates.lng,
                 }}
+                icon={'/marker.png'}
                 onDragEnd={async (e) => await onMarkerDragEnd('destAddress', 'destCoordinates', e)}
                 draggable={true}
               />
             ) : null}
           </div>
+        }
         </GoogleMap>
 
       </LoadScript>

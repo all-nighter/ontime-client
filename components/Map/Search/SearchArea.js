@@ -62,6 +62,12 @@ const MainSearch = (props) => {
                         onFocus={(e) => {
                             setSearch({...search, startAddress: ''})
                         }}
+                        onBlur={async (e) => {
+                            if (e.target.value !== '') {
+                                e.preventDefault(); // Ensure it is only this code that runs
+                                await submitSearch('startAddress', 'startCoordinates', e)
+                            }
+                        }}
                         onKeyPress={async (e) => {
                             if(e.key === 'Enter' && search.startAddress.length > 0){
                                 e.preventDefault(); // Ensure it is only this code that runs
@@ -80,6 +86,13 @@ const MainSearch = (props) => {
                         onChange={(e) => handleSearch('destAddress', e)}
                         onFocus={(e) => {
                             setSearch({...search, destAddress: ''})
+                        }}
+                        onBlur={async (e) => {
+                            if (e.target.value !== '') {
+                                e.preventDefault(); // Ensure it is only this code that runs
+                                await submitSearch('destAddress', 'destCoordinates', e)
+                            }
+                            
                         }}
                         onKeyPress={async (e) => {
                             if(e.key === 'Enter' && search.destAddress.length > 0){
