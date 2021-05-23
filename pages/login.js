@@ -242,6 +242,7 @@ function UserLogin(props) {
             onChange={(e) => {
               setPassword(e.target.value);
             }}
+            type={'password'}
           />
           <Button
             onClick={() => {
@@ -315,6 +316,7 @@ function DriverLogin(props) {
               console.log(e.target.value);
               setPassword(e.target.value);
             }}
+            type={'password'}
           />
           <Button
             onClick={() => {
@@ -417,6 +419,7 @@ function UserSignup(props) {
               console.log(e.target.value);
               setPassword(e.target.value);
             }}
+            type={'password'}
           />
           <Button
             onClick={() => {
@@ -533,6 +536,7 @@ function DriverSignup(props) {
               console.log(e.target.value);
               setPassword(e.target.value);
             }}
+            type={'password'}
           />
           <Button
             onClick={() => {
