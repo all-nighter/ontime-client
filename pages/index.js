@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -25,12 +25,17 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
+  useEffect(() => {
+    setTimeout(() => {
+      location.href = '/login';
+    }, 3000);
+  }, []);
   return (
     <MainLayout hideFooter={true}>
       <Grid className={classes.middleGrid}>
-        <Link href="/login">
-          <img src={'/logo1.png'} />
-        </Link>
+        {/* <Link href="/login"> */}
+        <img src={'/logo1.png'} />
+        {/* </Link> */}
       </Grid>
     </MainLayout>
   );
