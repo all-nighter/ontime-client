@@ -141,7 +141,7 @@ function SelectUserDriver(props) {
           props.setIsDriver(false);
         }}
       >
-        <img src={'/drive_eta.png'} className={classes.img} />
+        <img src={'/accessible.png'} className={classes.img} />
         <Button className={classes.bold}>User</Button>
       </Grid>
       <Grid
@@ -151,7 +151,7 @@ function SelectUserDriver(props) {
           props.setIsUser(false);
         }}
       >
-        <img src={'/accessible.png'} className={classes.img} />
+        <img src={'/drive_eta.png'} className={classes.img} />
         <Button className={classes.bold}>Driver</Button>
       </Grid>
     </Grid>
