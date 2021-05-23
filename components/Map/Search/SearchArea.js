@@ -37,6 +37,22 @@ const MainSearch = (props) => {
         MapContext.renderPin()
     }
 
+    const handleSwap = () => {
+       const startAddress = MapContext.getMapContext().startAddress
+       const destAddress = MapContext.getMapContext().destAddress
+
+       const startCoordinates = MapContext.getMapContext().startCoordinates
+       const destCoordinates = MapContext.getMapContext().destCoordinates
+
+       MapContext.setContext('startAddress', destAddress)
+       MapContext.setContext('destAddress', startAddress)
+       MapContext.setContext('startCoordinates', destCoordinates)
+       MapContext.setContext('destCoordinates', startCoordinates)
+       MapContext.renderSearch()
+       MapContext.renderPin()
+
+    }
+
     return (
         <Grid container className={Styles.textContainer}> 
             <Grid item xs={2} className={Styles.images}>
@@ -106,7 +122,9 @@ const MainSearch = (props) => {
             </Grid>
             <Grid item xs={1}>
                 <Grid item xs={12} className={Styles.imgContainer}>
-                    <img src='./swap_vert.png' className={Styles.image}/>
+                    <Button onClick={(e) => handleSwap()}> 
+                        <img src='./swap_vert.png' className={Styles.image}/>
+                    </Button>
                 </Grid>
             </Grid>
         </Grid>
